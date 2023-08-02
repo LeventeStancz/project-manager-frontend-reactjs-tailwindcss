@@ -231,11 +231,13 @@ function Register() {
               </button>
             </div>
           </form>
-          <Link to="/login">
-            <span className="text-lg text-custom-blue underline hover:cursor-pointer">
-              Login
-            </span>
-          </Link>
+          <div className="w-full text-center">
+            <Link to="/login">
+              <span className="text-lg text-custom-blue underline hover:cursor-pointer">
+                Login
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
     </main>
