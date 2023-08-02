@@ -1,25 +1,44 @@
+import { useContext, createContext, useState } from "react";
+
 import {
   EllipsisVerticalIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
 } from "@heroicons/react/24/outline";
 
-function Sidebar({ children }) {
+const SidebarContext = createContext();
+
+export default function Sidebar({ children }) {
+  const [expanded, setExpanded] = useState(true);
+
   return (
     <aside className="h-full w-fit">
       <nav className="h-full flex flex-col bg-zinc-900 border-r border-zinc-700">
-        <div className="p-4 pb-2 flex gap-x-4 justify-between items-center">
-          <h1
-            className={`text-4xl text-custom-orange font-bold overflow-hidden transition-all w-32`}
+        <div className="p-4 flex flex-row gap-x-4 justify-between items-center">
+          {expanded && (
+            <h1
+              className={`text-4xl text-custom-orange font-bold overflow-hidden transition-all ${
+                expanded ? "w-32" : "w-0"
+              }`}
+            >
+              OTCGD
+            </h1>
+          )}
+          <button
+            onClick={() => setExpanded((curr) => !curr)}
+            className="p-1.5 rounded-lg bg-zinc-700 hover:bg-zinc-600"
           >
-            OTCGD
-          </h1>
-          <button className="p-1.5 rounded-lg bg-zinc-700 hover:bg-zinc-600">
-            <ChevronDoubleLeftIcon className="text-zinc-100 w-7 h-7" />
+            {expanded ? (
+              <ChevronDoubleLeftIcon className="text-zinc-100 w-7 h-7" />
+            ) : (
+              <ChevronDoubleRightIcon className="text-zinc-100 w-7 h-7" />
+            )}
           </button>
         </div>
 
-        <ul className="flex-1 px-3">{children}</ul>
+        <SidebarContext.Provider value={{ expanded }}>
+          <ul className="flex-1 px-3">{children}</ul>
+        </SidebarContext.Provider>
 
         <div className="border-t border-zinc-600 flex p-3">
           <div className="w-10 h-10 rounded-md bg-custom-purple flex justify-center items-center">
@@ -28,7 +47,7 @@ function Sidebar({ children }) {
           <div
             className={`
               flex justify-between items-center
-              overflow-hidden transition-all w-52 ml-3
+              overflow-hidden transition-all ${expanded ? "w-44 ml-3" : "w-0"}
           `}
           >
             <div className="leading-4 truncate text-zinc-600 overflow-hidden">
@@ -45,4 +64,56 @@ function Sidebar({ children }) {
   );
 }
 
-export default Sidebar;
+export function SidebarItem({
+  icon,
+  text = "Unknown",
+  active = false,
+  alert = false,
+}) {
+  const { expanded } = useContext(SidebarContext);
+
+  return (
+    <li
+      className={`
+      
+        relative flex items-center py-2 px-3 my-1
+        font-medium rounded-md cursor-pointer
+        transition-colors group
+        ${
+          active
+            ? "bg-gradient-to-tr from-zinc-700 to-zinc-600"
+            : "hover:bg-zinc-700"
+        }
+    `}
+    >
+      {icon}
+      <span
+        className={`text-xl overflow-hidden transition-all ${
+          expanded ? "w-fit ml-3" : "w-0"
+        }`}
+      >
+        {text}
+      </span>
+      {alert && (
+        <div
+          className={`absolute right-2 w-2 h-2 rounded-full bg-custom-purple  ${
+            expanded ? "" : "top-2"
+          }`}
+        />
+      )}
+
+      {!expanded && (
+        <div
+          className={`
+          absolute left-full rounded-md px-2 py-1 ml-6
+          bg-zinc-200 text-black text-sm
+          invisible opacity-20 -translate-x-3 transition-all
+          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
+      `}
+        >
+          {text}
+        </div>
+      )}
+    </li>
+  );
+}
