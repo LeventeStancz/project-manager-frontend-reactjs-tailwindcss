@@ -32,7 +32,7 @@ function Register() {
 
   //component loads, setting focus to input
   useEffect(() => {
-    //inputRef.current.focus();
+    inputRef.current.focus();
   }, []);
 
   //validating username when it changes
@@ -65,7 +65,7 @@ function Register() {
     <main className="w-full h-screen flex flex-col justify-start items-center mt-10">
       <section className="w-1/5 h-fit p-4 rounded-xl bg-zinc-800">
         <div className="w-full h-full flex flex-col">
-          <h1 className="w-full py-2 text-center text-3xl font-bold text-custom-orange">
+          <h1 className="w-full pb-4 text-center text-3xl font-bold text-custom-orange">
             OTCGD
           </h1>
           <form
@@ -90,7 +90,7 @@ function Register() {
               aria-describedby="usernamenote"
               onBlur={() => setUsernameFocus(false)}
               onFocus={() => setUsernameFocus(true)}
-              className="w-full h-fit text-center py-2 bg-zinc-800 rounded-lg focus:ring-0 border-2 focus:border-2 focus:border-custom-purple"
+              className="w-full h-fit text-center py-2 bg-zinc-800 rounded-lg focus:ring-0 focus:border-custom-purple"
             />
             <p
               id="usernamenote"
@@ -120,7 +120,7 @@ function Register() {
               aria-describedby="emailnote"
               onBlur={() => setEmailFocus(false)}
               onFocus={() => setEmailFocus(true)}
-              className="w-full h-fit text-center py-2 bg-zinc-800 rounded-lg focus:ring-0 border-2 focus:border-2 focus:border-custom-purple"
+              className="w-full h-fit text-center py-2 bg-zinc-800 rounded-lg focus:ring-0 focus:border-custom-purple"
             />
             <p
               id="emailnote"
@@ -149,7 +149,7 @@ function Register() {
                 aria-describedby="passwordnote"
                 onBlur={() => setPasswordFocus(false)}
                 onFocus={() => setPasswordFocus(true)}
-                className="w-full h-fit text-center py-2 bg-zinc-800 rounded-lg focus:ring-0 border-2 focus:border-2 focus:border-custom-purple"
+                className="w-full h-fit text-center py-2 bg-zinc-800 rounded-lg focus:ring-0 focus:border-custom-purple"
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
