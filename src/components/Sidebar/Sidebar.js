@@ -30,9 +30,9 @@ export default function Sidebar({ children }) {
             className="p-2 ring-2 ring-zinc-700 hover:ring-zinc-500 rounded-lg"
           >
             {expanded ? (
-              <ChevronDoubleLeftIcon className="text-zinc-100 w-7 h-7" />
+              <ChevronDoubleLeftIcon className="text-zinc-100 w-6 h-6" />
             ) : (
-              <ChevronDoubleRightIcon className="text-zinc-100 w-7 h-7" />
+              <ChevronDoubleRightIcon className="text-zinc-100 w-6 h-6" />
             )}
           </button>
         </div>

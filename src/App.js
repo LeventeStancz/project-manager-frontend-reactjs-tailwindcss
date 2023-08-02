@@ -1,17 +1,31 @@
-import { HomeIcon } from "@heroicons/react/24/outline";
+import { Routes, Route } from "react-router-dom";
 
-import Sidebar, { SidebarItem } from "./components/Sidebar/Sidebar";
+//layouts
+import RootLayout from "./layouts/RootLayout";
+import MainLayout from "./layouts/MainLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
 
 function App() {
   return (
-    <div className="h-screen w-full overflow-y-hidden overflow-x-hidden">
-      <Sidebar>
-        <SidebarItem
-          icon={<HomeIcon className="w-8 h-8" />}
-          text={"Dashboard"}
-        />
-      </Sidebar>
-    </div>
+    <Routes>
+      <Route path="/" element={<RootLayout />}>
+        {/* public routes 
+        <Route index path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="unauthorized" element={<Unauthorized />} />*/}
+
+        {/* protected routes
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>*/}
+        <Route element={<MainLayout />}>
+          <Route index path="/" element={<DashboardLayout />} />
+        </Route>
+        {/*</Route>
+        </Route>*/}
+        {/* 404 
+        <Route path="*" element={<Missing />} />*/}
+      </Route>
+    </Routes>
   );
 }
 
