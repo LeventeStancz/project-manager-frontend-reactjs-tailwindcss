@@ -5,11 +5,11 @@ import Sidebar, { SidebarItem } from "../components/Sidebar/Sidebar";
 
 function MainLayout() {
   return (
-    <div className="h-full w-full flex flex-row flex-nowrap">
+    <div className="h-full w-full flex flex-row flex-nowrap px-2 py-3 gap-x-3">
       <Sidebar>
         <SidebarItem
           href="/"
-          icon={<HomeIcon className="w-8 h-8" />}
+          icon={<HomeIcon className="w-7 h-7" />}
           text={"Dashboard"}
         />
       </Sidebar>

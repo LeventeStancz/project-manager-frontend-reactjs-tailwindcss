@@ -14,15 +14,15 @@ export default function Sidebar({ children }) {
 
   return (
     <aside className="h-full w-fit">
-      <nav className="h-full flex flex-col bg-zinc-900 border-r border-zinc-700">
+      <nav className="h-full flex flex-col bg-zinc-900 rounded-xl ring-1 ring-zinc-700">
         <div
-          className={`p-4 flex flex-row gap-x-4 ${
-            expanded ? "justify-between" : "justify-center"
+          className={`p-4 flex flex-row  ${
+            expanded ? "justify-between gap-x-4" : "justify-center"
           } items-center`}
         >
           <h1
-            className={`text-4xl text-custom-orange font-bold overflow-hidden transition-all ${
-              expanded ? "w-32" : "hidden"
+            className={`text-3xl text-custom-orange font-bold overflow-hidden transition-all duration-300 ${
+              expanded ? "w-32" : "w-0"
             }`}
           >
             OTCGD
@@ -30,12 +30,22 @@ export default function Sidebar({ children }) {
 
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className="p-2 ring-2 ring-zinc-700 hover:ring-zinc-500 rounded-lg"
+            className="relative group p-2 ring-2 ring-zinc-700 hover:ring-zinc-500 rounded-lg"
           >
+            {!expanded && (
+              <div
+                className="absolute left-full top-1 rounded-md px-2 py-1 ml-6
+          bg-zinc-200 text-black text-sm
+          invisible opacity-20 -translate-x-3 transition-all duration-300
+          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0"
+              >
+                Open
+              </div>
+            )}
             {expanded ? (
-              <ChevronDoubleLeftIcon className="text-zinc-100 w-6 h-6" />
+              <ChevronDoubleLeftIcon className="text-zinc-100 w-5 h-5" />
             ) : (
-              <ChevronDoubleRightIcon className="text-zinc-100 w-6 h-6" />
+              <ChevronDoubleRightIcon className="text-zinc-100 w-5 h-5" />
             )}
           </button>
         </div>
@@ -56,7 +66,9 @@ export default function Sidebar({ children }) {
           <div
             className={`
               flex justify-between items-center
-              overflow-hidden transition-all ${expanded ? "w-44 ml-3" : "w-0"}
+              overflow-hidden transition-all duration-300 ${
+                expanded ? "w-44 ml-3" : "w-0"
+              }
           `}
           >
             <div className="leading-4 truncate text-zinc-600 overflow-hidden">
@@ -91,16 +103,12 @@ export function SidebarItem({
         relative flex items-center py-2 px-3 my-1
         font-medium rounded-md cursor-pointer
         transition-colors group
-        ${
-          isActive
-            ? " bg-gradient-to-tr from-zinc-700 to-zinc-600"
-            : " hover:bg-zinc-700"
-        }
+        ${isActive ? " bg-slate-800" : " hover:bg-slate-700"}
     `}
           >
             {icon}
             <span
-              className={`text-xl overflow-hidden transition-all ${
+              className={`text-lg overflow-hidden transition-all duration-300 ${
                 expanded ? "w-fit ml-3" : "w-0"
               }`}
             >
@@ -119,7 +127,7 @@ export function SidebarItem({
                 className={`
           absolute left-full rounded-md px-2 py-1 ml-6
           bg-zinc-200 text-black text-sm
-          invisible opacity-20 -translate-x-3 transition-all
+          invisible opacity-20 -translate-x-3 transition-all duration-300
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
       `}
               >
