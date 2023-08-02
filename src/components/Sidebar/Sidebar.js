@@ -76,7 +76,7 @@ export default function Sidebar({ children }) {
               <span className="text-xs">jhondoe@gmail.com</span>
             </div>
             <button>
-              <EllipsisVerticalIcon className="w-9 h-9" />
+              <EllipsisVerticalIcon className="w-8 h-8" />
             </button>
           </div>
         </div>
