@@ -8,6 +8,7 @@ function MainLayout() {
     <div className="h-full w-full flex flex-row flex-nowrap">
       <Sidebar>
         <SidebarItem
+          href="/"
           icon={<HomeIcon className="w-8 h-8" />}
           text={"Dashboard"}
         />
