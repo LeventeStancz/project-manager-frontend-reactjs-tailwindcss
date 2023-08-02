@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 //pages
 import Missing from "./pages/Missing";
 import Unauthorized from "./pages/Unauthorized";
+import Register from "./pages/register-login/Register";
 //layouts
 import RootLayout from "./layouts/RootLayout";
 import MainLayout from "./layouts/MainLayout";
@@ -13,8 +14,8 @@ function App() {
     <Routes>
       <Route path="/" element={<RootLayout />}>
         {/* public routes 
-        <Route index path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />*/}
+        <Route index path="login" element={<Login />} />*/}
+        <Route path="register" element={<Register />} />
         <Route path="unauthorized" element={<Unauthorized />} />
 
         {/* protected routes
