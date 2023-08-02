@@ -1,5 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
+//pages
+import Missing from "./pages/Missing";
+import Unauthorized from "./pages/Unauthorized";
 //layouts
 import RootLayout from "./layouts/RootLayout";
 import MainLayout from "./layouts/MainLayout";
@@ -11,8 +14,8 @@ function App() {
       <Route path="/" element={<RootLayout />}>
         {/* public routes 
         <Route index path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="unauthorized" element={<Unauthorized />} />*/}
+        <Route path="register" element={<Register />} />*/}
+        <Route path="unauthorized" element={<Unauthorized />} />
 
         {/* protected routes
         <Route element={<PersistLogin />}>
@@ -22,8 +25,8 @@ function App() {
         </Route>
         {/*</Route>
         </Route>*/}
-        {/* 404 
-        <Route path="*" element={<Missing />} />*/}
+        {/* 404 */}
+        <Route path="*" element={<Missing />} />
       </Route>
     </Routes>
   );
