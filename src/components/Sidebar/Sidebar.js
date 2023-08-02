@@ -15,16 +15,19 @@ export default function Sidebar({ children }) {
   return (
     <aside className="h-full w-fit">
       <nav className="h-full flex flex-col bg-zinc-900 border-r border-zinc-700">
-        <div className="p-4 flex flex-row gap-x-4 justify-between items-center">
-          {expanded && (
-            <h1
-              className={`text-4xl text-custom-orange font-bold overflow-hidden transition-all ${
-                expanded ? "w-32" : "w-0"
-              }`}
-            >
-              OTCGD
-            </h1>
-          )}
+        <div
+          className={`p-4 flex flex-row gap-x-4 ${
+            expanded ? "justify-between" : "justify-center"
+          } items-center`}
+        >
+          <h1
+            className={`text-4xl text-custom-orange font-bold overflow-hidden transition-all ${
+              expanded ? "w-32" : "hidden"
+            }`}
+          >
+            OTCGD
+          </h1>
+
           <button
             onClick={() => setExpanded((curr) => !curr)}
             className="p-2 ring-2 ring-zinc-700 hover:ring-zinc-500 rounded-lg"
@@ -41,7 +44,12 @@ export default function Sidebar({ children }) {
           <ul className="flex-1 px-3">{children}</ul>
         </SidebarContext.Provider>
 
-        <div className="border-t border-zinc-600 flex p-3">
+        <div
+          className={
+            "border-t border-zinc-600 flex p-3 " +
+            (!expanded && "justify-center")
+          }
+        >
           <div className="w-10 h-10 rounded-md bg-custom-purple flex justify-center items-center">
             <h3 className="text-purple-900 font-bold text-2xl">JD</h3>
           </div>
