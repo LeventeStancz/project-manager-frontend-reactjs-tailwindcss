@@ -2,15 +2,18 @@ import { useContext, createContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import {
-  EllipsisVerticalIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
+  ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/outline";
+
+import useLogout from "../../hooks/useLogout";
 
 const SidebarContext = createContext();
 
 export default function Sidebar({ children }) {
   const [expanded, setExpanded] = useState(true);
+  const logout = useLogout();
 
   return (
     <aside className="h-screen">
@@ -57,27 +60,23 @@ export default function Sidebar({ children }) {
           <div className="flex-1 px-3 flex flex-col gap-y-2">{children}</div>
         </SidebarContext.Provider>
 
-        <div className="ring-1 ring-zinc-700 flex p-3">
-          <div
-            className={`w-10 h-10 ${
-              !expanded && "ml-1"
-            } rounded-md flex justify-center items-center bg-custom-purple`}
-          >
-            <h4 className="font-bold text-xl text-purple-800">JD</h4>
-          </div>
+        <div className="ring-1 ring-zinc-700 flex justify-center items-center p-3">
+          <ArrowRightOnRectangleIcon
+            onClick={logout}
+            className="w-8 h-8 text-blue-700 hover:cursor-pointer"
+          />
           <div
             className={`
-              flex justify-between items-center
+              flex items-center
               overflow-hidden transition-all duration-500 ${
                 expanded ? "w-44 ml-3" : "w-0"
               }
           `}
           >
-            <div className="leading-4">
-              <h4 className="font-semibold">John Doe</h4>
-              <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+            <div className="leading-4 truncate text-gray-600">
+              <h4 className="font-semibold truncate text-white">John Doe</h4>
+              <span className="text-xs">johndoe@gmail.com</span>
             </div>
-            <EllipsisVerticalIcon className="w-8 h-8" />
           </div>
         </div>
       </nav>
