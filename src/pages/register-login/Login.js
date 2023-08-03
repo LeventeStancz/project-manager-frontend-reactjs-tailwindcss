@@ -58,7 +58,7 @@ function Login() {
 
       const { accessToken } = response?.data;
 
-      //setAuth({ accessToken });
+      setAuth(accessToken);
       //clear inputs
       setUser("");
       setPass("");
