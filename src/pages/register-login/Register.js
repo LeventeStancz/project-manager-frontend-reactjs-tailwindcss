@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import axios from "../../services/axios";
 
 //username regex --> can only contain:
 //lower/uppercase letter, 0-9 numbers, hyphens, underscores
@@ -13,6 +15,9 @@ const EMAIL_REGEX =
 function Register() {
   //focus to first input (username field)
   const inputRef = useRef();
+
+  //navigate to login after successful registration
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [validUsername, setValidUsername] = useState(false);
@@ -28,7 +33,7 @@ function Register() {
   const [emailFocus, setEmailFocus] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [clientMsg, setClientMsg] = useState("");
 
   //component loads, setting focus to input
   useEffect(() => {
@@ -60,19 +65,47 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post(
+        "/auth/register",
+        JSON.stringify({
+          username,
+          email,
+          password,
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      //clear inputs
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setClientMsg(response?.data?.clientMsg);
+      setTimeout(() => {
+        //navigate
+        navigate("/login", { replace: true });
+      }, 2000); //2 sec
+    } catch (error) {
+      if (!error.response?.data?.clientMsg || !error.response?.data?.error) {
+        setErrorMsg("Server offline. Try again later.");
+      } else {
+        setErrorMsg(error.response.data.clientMsg);
+        console.log(error.response.data.error);
+      }
+    }
   };
   return (
     <main className="w-full h-screen flex flex-col justify-start items-center mt-10">
-      <section className="w-1/5 h-fit p-4 rounded-xl bg-zinc-800">
+      <section className="w-1/4 h-fit p-4 rounded-xl bg-zinc-800">
         <div className="w-full h-full flex flex-col">
           <h1 className="w-full pb-4 text-center text-3xl font-bold text-custom-orange">
             OTCGD
           </h1>
           <form
             onSubmit={handleSubmit}
-            className={
-              success ? "hidden" : "w-full flex flex-col items-start space-y-3"
-            }
+            className="w-full flex flex-col items-start space-y-3"
           >
             <label htmlFor="username" className="self-start text-xl">
               Username:
@@ -218,6 +251,15 @@ function Register() {
               }
             >
               {errorMsg}
+            </h2>
+            <h2
+              className={
+                clientMsg
+                  ? "w-full text-center text-xl text-custom-green"
+                  : "hidden"
+              }
+            >
+              {clientMsg}
             </h2>
 
             <div className="w-full flex justify-center py-3">
