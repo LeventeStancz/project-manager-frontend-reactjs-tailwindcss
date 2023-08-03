@@ -1,5 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
+//auth
+import RequireAuth from "./contexts/RequireAuth";
+import PersistLogin from "./contexts/PersistLogin";
 //pages
 import Missing from "./pages/Missing";
 import Unauthorized from "./pages/Unauthorized";
@@ -19,14 +22,14 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="unauthorized" element={<Unauthorized />} />
 
-        {/* protected routes
+        {/* protected routes*/}
         <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth />}>*/}
-        <Route element={<MainLayout />}>
-          <Route index path="/" element={<DashboardLayout />} />
+          <Route element={<RequireAuth />}>
+            <Route element={<MainLayout />}>
+              <Route index path="/" element={<DashboardLayout />} />
+            </Route>
+          </Route>
         </Route>
-        {/*</Route>
-        </Route>*/}
         {/* 404 */}
         <Route path="*" element={<Missing />} />
       </Route>
