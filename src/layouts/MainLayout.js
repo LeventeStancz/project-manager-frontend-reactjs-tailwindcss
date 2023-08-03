@@ -5,12 +5,27 @@ import Sidebar, { SidebarItem } from "../components/Sidebar/Sidebar";
 
 function MainLayout() {
   return (
-    <div className="h-full w-full flex flex-row flex-nowrap px-2 py-3 gap-x-3">
+    <div className="h-full w-full flex flex-row flex-nowrap">
       <Sidebar>
         <SidebarItem
           href="/"
           icon={<HomeIcon className="w-7 h-7" />}
           text={"Dashboard"}
+        />
+        <SidebarItem
+          href="/profile"
+          icon={<HomeIcon className="w-7 h-7" />}
+          text={"Profile"}
+        />
+        <SidebarItem
+          href="/asd"
+          icon={<HomeIcon className="w-7 h-7" />}
+          text={"Settings"}
+        />
+        <SidebarItem
+          href="/bfc"
+          icon={<HomeIcon className="w-7 h-7" />}
+          text={"Projects"}
         />
       </Sidebar>
       <Outlet />
