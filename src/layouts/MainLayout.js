@@ -12,21 +12,6 @@ function MainLayout() {
           icon={<HomeIcon className="w-7 h-7" />}
           text={"Dashboard"}
         />
-        <SidebarItem
-          href="/profile"
-          icon={<HomeIcon className="w-7 h-7" />}
-          text={"Profile"}
-        />
-        <SidebarItem
-          href="/asd"
-          icon={<HomeIcon className="w-7 h-7" />}
-          text={"Settings"}
-        />
-        <SidebarItem
-          href="/bfc"
-          icon={<HomeIcon className="w-7 h-7" />}
-          text={"Projects"}
-        />
       </Sidebar>
       <Outlet />
     </div>
