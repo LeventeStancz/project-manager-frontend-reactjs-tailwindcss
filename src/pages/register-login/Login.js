@@ -20,6 +20,7 @@ function Login() {
   const [showPass, setShowPass] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState("");
+  const [clientMsg, setClientMsg] = useState("");
 
   //component loads, setting focus to input
   useEffect(() => {
@@ -39,7 +40,42 @@ function Login() {
     localStorage.setItem("trustedDevice", trustedDevice);
   }, [trustedDevice]);
 
-  const handleSubmit = async (e) => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "/auth/login",
+        JSON.stringify({
+          username: user,
+          password: pass,
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+
+      const { accessToken } = response?.data;
+
+      //setAuth({ accessToken });
+      //clear inputs
+      setUser("");
+      setPass("");
+      setClientMsg(response?.data?.clientMsg);
+      setTimeout(() => {
+        //navigate
+        navigate(from, { replace: true });
+      }, 2000); //2 sec
+    } catch (error) {
+      if (!error.response?.data?.clientMsg || !error.response?.data?.error) {
+        setErrorMsg("Server offline. Try again later.");
+      } else {
+        setErrorMsg(error.response.data.clientMsg);
+        console.log(error.response.data.error);
+      }
+    }
+  };
   return (
     <main className="w-full h-screen flex flex-col justify-start items-center mt-10">
       <section className="w-1/5 h-fit p-4 rounded-xl bg-zinc-800">
@@ -151,6 +187,15 @@ function Login() {
               }
             >
               {errorMsg}
+            </h2>
+            <h2
+              className={
+                clientMsg
+                  ? "w-full text-center text-xl text-custom-green"
+                  : "hidden"
+              }
+            >
+              {clientMsg}
             </h2>
 
             <div className="w-full flex justify-center py-3">
