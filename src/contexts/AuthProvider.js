@@ -6,8 +6,9 @@ export const AuthProvider = ({ children }) => {
   //creating state to store auth values
   const [auth, setAuth] = useState(false);
   //for "trust this device" function
+
   const [trustedDevice, setTrustedDevice] = useState(
-    JSON.parse(localStorage.getItem("trustedDevice")) || false
+    localStorage.getItem("trustedDevice") || false
   );
 
   //passing state with provider to children components

@@ -2,10 +2,11 @@ import { useRef, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import axios from "../../services/axios";
+import useAuth from "../../hooks/useAuth";
 
 function Login() {
   //store global auth state in the context
-  const { setAuth, trustedDevice, setTrustedDevice } = {};
+  const { setAuth, trustedDevice, setTrustedDevice } = useAuth();
 
   //take the user back to where they got logged out after a successful login
   const navigate = useNavigate();
