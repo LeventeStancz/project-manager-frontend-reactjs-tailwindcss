@@ -7,10 +7,10 @@ import useAuth from "../hooks/useAuth";
 //(so when they login they get back to that page)
 //replace: replaces the path in the browser history
 const RequireAuth = () => {
-  const { auth } = useAuth();
+  const { authToken } = useAuth();
   const location = useLocation();
 
-  return auth ? (
+  return authToken ? (
     <Outlet />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />

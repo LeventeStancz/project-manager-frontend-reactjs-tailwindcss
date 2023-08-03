@@ -6,7 +6,7 @@ import useAuth from "../../hooks/useAuth";
 
 function Login() {
   //store global auth state in the context
-  const { setAuth, trustedDevice, setTrustedDevice } = useAuth();
+  const { setAuthToken, trustedDevice, setTrustedDevice } = useAuth();
 
   //take the user back to where they got logged out after a successful login
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ function Login() {
 
       const { accessToken } = response?.data;
 
-      setAuth(accessToken);
+      setAuthToken(accessToken);
       //clear inputs
       setUser("");
       setPass("");
@@ -67,7 +67,7 @@ function Login() {
       setTimeout(() => {
         //navigate
         navigate(from, { replace: true });
-      }, 2000); //2 sec
+      }, 1000); //1 sec
     } catch (error) {
       if (!error.response?.data?.clientMsg || !error.response?.data?.error) {
         setErrorMsg("Server offline. Try again later.");

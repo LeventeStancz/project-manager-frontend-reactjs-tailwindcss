@@ -2,10 +2,10 @@ import axios from "../services/axios";
 import useAuth from "./useAuth";
 
 const useLogout = () => {
-  const { setAuth } = useAuth();
+  const { setAuthToken } = useAuth();
 
   const logout = async () => {
-    setAuth(false);
+    setAuthToken(false);
     try {
       await axios("/auth/logout", {
         withCredentials: true,

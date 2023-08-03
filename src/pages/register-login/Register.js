@@ -86,7 +86,7 @@ function Register() {
       setTimeout(() => {
         //navigate
         navigate("/login", { replace: true });
-      }, 2000); //2 sec
+      }, 1000); //1 sec
     } catch (error) {
       if (!error.response?.data?.clientMsg || !error.response?.data?.error) {
         setErrorMsg("Server offline. Try again later.");

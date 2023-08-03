@@ -9,7 +9,7 @@ import { RotatingLines } from "react-loader-spinner";
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
   const getNewAccessToken = useRefreshToken();
-  const { auth, trustedDevice } = useAuth();
+  const { authToken, trustedDevice } = useAuth();
 
   useEffect(() => {
     let isMounted = true;
@@ -24,7 +24,7 @@ const PersistLogin = () => {
       }
     };
 
-    !auth ? verifyRefreshToken() : setIsLoading(false);
+    !authToken ? verifyRefreshToken() : setIsLoading(false);
 
     return () => (isMounted = false);
   }, []);
