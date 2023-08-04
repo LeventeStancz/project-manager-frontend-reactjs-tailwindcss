@@ -1,6 +1,11 @@
 import { Outlet } from "react-router-dom";
 
-import { HomeIcon } from "@heroicons/react/24/outline";
+import {
+  HomeIcon,
+  Square3Stack3DIcon,
+  BellIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 import Sidebar, { SidebarItem } from "../components/Sidebar/Sidebar";
 
 function MainLayout() {
@@ -11,6 +16,21 @@ function MainLayout() {
           href="/"
           icon={<HomeIcon className="w-7 h-7" />}
           text={"Dashboard"}
+        />
+        <SidebarItem
+          href="/project/recent"
+          icon={<Square3Stack3DIcon className="w-7 h-7" />}
+          text={"Project"}
+        />
+        <SidebarItem
+          href="/invites"
+          icon={<BellIcon className="w-7 h-7" />}
+          text={"Invites"}
+        />
+        <SidebarItem
+          href="/profile"
+          icon={<UserIcon className="w-7 h-7" />}
+          text={"Profile"}
         />
       </Sidebar>
       <Outlet />

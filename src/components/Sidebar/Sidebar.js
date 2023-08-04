@@ -17,14 +17,14 @@ export default function Sidebar({ children }) {
 
   return (
     <aside className="h-screen">
-      <nav className="h-full flex flex-col bg-zinc-900 ring-1 ring-zinc-700">
+      <nav className="h-full flex flex-col bg-custom-black border-r border-custom-gray-dark">
         <div
           className={`p-4 flex flex-row  
            justify-between
          items-center`}
         >
           <h1
-            className={`text-3xl text-custom-orange font-bold overflow-hidden transition-all duration-500 ${
+            className={`text-3xl text-custom-orange font-bold overflow-hidden transition-all duration-300 ${
               expanded ? "w-32" : "w-0"
             }`}
           >
@@ -34,20 +34,18 @@ export default function Sidebar({ children }) {
             onClick={() => setExpanded((curr) => !curr)}
             className={`relative group p-1.5 ${
               !expanded && "mr-1"
-            } rounded-lg ring-2 ring-slate-700 hover:ring-slate-600`}
+            } rounded-lg ring-2 ring-slate-700 hover:ring-slate-400`}
           >
-            {!expanded && (
-              <div
-                className={`
-          absolute left-full rounded-md px-2 py-1 ml-6
+            <div
+              className={`
+          absolute left-10 rounded-md px-2 py-1 ml-6
           bg-slate-600 text-slate-300 text-sm
-          invisible opacity-20 -translate-x-3 transition-all duration-500
+          invisible opacity-20 -translate-x-3 transition-all duration-300
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
       `}
-              >
-                Open
-              </div>
-            )}
+            >
+              {expanded ? "Close" : "Open"}
+            </div>
             {expanded ? (
               <ChevronDoubleLeftIcon className="w-6 h-6" />
             ) : (
@@ -60,20 +58,35 @@ export default function Sidebar({ children }) {
           <div className="flex-1 px-3 flex flex-col gap-y-2">{children}</div>
         </SidebarContext.Provider>
 
-        <div className="ring-1 ring-zinc-700 flex justify-center items-center p-3">
-          <ArrowRightOnRectangleIcon
-            onClick={logout}
-            className="w-8 h-8 text-blue-700 hover:cursor-pointer"
-          />
+        <div className="border-t border-custom-gray-light flex justify-center items-center p-3">
+          <div className="relative group">
+            {!expanded && (
+              <div
+                className={`
+          absolute left-10 rounded-md px-2 py-1 ml-6
+          bg-slate-600 text-slate-300 text-sm
+          invisible opacity-20 -translate-x-3 transition-all duration-300
+          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
+      `}
+              >
+                Logout
+              </div>
+            )}
+            <ArrowRightOnRectangleIcon
+              onClick={logout}
+              className="w-8 h-8 text-slate-400 hover:cursor-pointer"
+            />
+          </div>
+
           <div
             className={`
               flex items-center
-              overflow-hidden transition-all duration-500 ${
+              overflow-hidden transition-all duration-300 ${
                 expanded ? "w-44 ml-3" : "w-0"
               }
           `}
           >
-            <div className="leading-4 truncate text-gray-600">
+            <div className="leading-4 truncate text-custom-gray-bright">
               <h4 className="font-semibold truncate text-white">John Doe</h4>
               <span className="text-xs">johndoe@gmail.com</span>
             </div>
@@ -101,14 +114,14 @@ export function SidebarItem({
       
         relative flex items-center py-2 px-3 my-1
         font-medium rounded-md cursor-pointer
-        transition-colors group duration-500
+        transition-colors group duration-300
         ${isActive ? " bg-slate-800" : " hover:bg-slate-600"}
     `}
           >
             {icon}
             <span
               className={`
-              overflow-hidden transition-all duration-500 ${
+              overflow-hidden transition-all duration-300 ${
                 expanded ? "w-32 ml-3" : "w-0"
               }`}
             >
@@ -116,7 +129,7 @@ export function SidebarItem({
             </span>
             {alert && (
               <div
-                className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${
+                className={`absolute right-2 w-2 h-2 rounded bg-custom-purple ${
                   expanded ? "" : "top-2"
                 }`}
               />
@@ -127,7 +140,7 @@ export function SidebarItem({
                 className={`
           absolute left-full rounded-md px-2 py-1 ml-6
           bg-slate-600 text-slate-300 text-sm
-          invisible opacity-20 -translate-x-3 transition-all duration-500
+          invisible opacity-20 -translate-x-3 transition-all duration-300
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
       `}
               >

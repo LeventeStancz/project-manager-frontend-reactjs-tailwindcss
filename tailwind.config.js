@@ -11,6 +11,12 @@
           blue: "#168FE7",
           red: "#DB4848",
           green: "#33872B",
+          gray: {
+            base: "#272727",
+            dark: "#1E1E1E",
+            light: "#343434",
+            bright: "#646464",
+          },
           yellow: {
             base: "#D5D910",
             card: "#BEC116",
