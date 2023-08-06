@@ -1,4 +1,3 @@
-import { useContext, createContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import {
@@ -8,21 +7,16 @@ import {
 } from "@heroicons/react/24/outline";
 
 import useLogout from "../../hooks/useLogout";
-
-const SidebarContext = createContext();
+import useSidebar from "../../hooks/useSidebar";
 
 export default function Sidebar({ children }) {
-  const [expanded, setExpanded] = useState(true);
+  const { expanded, setExpanded } = useSidebar();
   const logout = useLogout();
 
   return (
-    <aside className="h-screen">
+    <aside className="h-full">
       <nav className="h-full flex flex-col bg-custom-black border-r border-custom-gray-dark">
-        <div
-          className={`p-4 flex flex-row  
-           justify-between
-         items-center`}
-        >
+        <div className="p-4 flex flex-row justify-between items-center">
           <h1
             className={`text-3xl text-custom-orange font-bold overflow-hidden transition-all duration-300 ${
               expanded ? "w-32" : "w-0"
@@ -54,41 +48,42 @@ export default function Sidebar({ children }) {
           </button>
         </div>
 
-        <SidebarContext.Provider value={{ expanded }}>
-          <div className="flex-1 px-3 flex flex-col gap-y-2">{children}</div>
-        </SidebarContext.Provider>
-
-        <div className="border-t border-custom-gray-light flex justify-center items-center p-3">
-          <div className="relative group">
-            {!expanded && (
-              <div
-                className={`
+        <div className="h-full max-h-full overflow-y-hidden overflow-x-hidden flex flex-col justify-between">
+          <div className="overflow-y-hidden overflow-x-hidden px-3 flex flex-col gap-y-2">
+            {children}
+          </div>
+          <div className="border-t border-custom-gray-light flex justify-center items-center p-3">
+            <div className="relative group">
+              {!expanded && (
+                <div
+                  className={`
           absolute left-10 rounded-md px-2 py-1 ml-6
           bg-slate-600 text-slate-300 text-sm
           invisible opacity-20 -translate-x-3 transition-all duration-300
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
       `}
-              >
-                Logout
-              </div>
-            )}
-            <ArrowRightOnRectangleIcon
-              onClick={logout}
-              className="w-8 h-8 text-slate-400 hover:cursor-pointer"
-            />
-          </div>
+                >
+                  Logout
+                </div>
+              )}
+              <ArrowRightOnRectangleIcon
+                onClick={logout}
+                className="w-8 h-8 text-slate-400 hover:cursor-pointer"
+              />
+            </div>
 
-          <div
-            className={`
+            <div
+              className={`
               flex items-center
               overflow-hidden transition-all duration-300 ${
                 expanded ? "w-44 ml-3" : "w-0"
               }
           `}
-          >
-            <div className="leading-4 truncate text-custom-gray-bright">
-              <h4 className="font-semibold truncate text-white">John Doe</h4>
-              <span className="text-xs">johndoe@gmail.com</span>
+            >
+              <div className="leading-4 truncate text-custom-gray-bright">
+                <h4 className="font-semibold truncate text-white">John Doe</h4>
+                <span className="text-xs">johndoe@gmail.com</span>
+              </div>
             </div>
           </div>
         </div>
@@ -103,7 +98,7 @@ export function SidebarItem({
   text = "Unknown",
   alert = false,
 }) {
-  const { expanded } = useContext(SidebarContext);
+  const { expanded } = useSidebar();
 
   return (
     <NavLink to={href}>
@@ -111,7 +106,6 @@ export function SidebarItem({
         return (
           <div
             className={`
-      
         relative flex items-center py-2 px-3 my-1
         font-medium rounded-md cursor-pointer
         transition-colors group duration-300
