@@ -16,25 +16,27 @@ function ProjectCard({
 }) {
   const [infoPopUp, setInfoPopUp] = useState(false);
   return (
-    <div className="w-64 h-fit relative z-0 flex-shrink-0 hover:cursor-pointer">
-      <div className="w-fit h-fit absolute z-10 top-2 right-2 text-custom-gray-bright hover:cursor-help">
-        <InformationCircleIcon
-          onMouseEnter={() => setInfoPopUp(true)}
-          onMouseLeave={() => setInfoPopUp(false)}
-          className="w-8 h-8"
-        />
-        {infoPopUp && (
-          <div className="h-fit min-w-[300px] w-fit break-words absolute -top-2 left-10 bg-neutral-700 py-2 px-3 rounded-lg text-custom-purple font-medium text-lg">
-            {shortDescription}
-          </div>
-        )}
-      </div>
+    <div className="w-fit h-fit relative z-0 flex-shrink-0 hover:cursor-pointer">
       <NavLink to={`/project/${_id}`}>
         <div className="w-full h-full flex-shrink-0 bg-custom-gray-base rounded-xl px-4 py-3 hover:cursor-pointer">
-          <div className="w-full h-full flex flex-col space-y-4 items-start">
-            <p className="text-xl pr-8 font-semibold break-words leading-thight">
-              {name || "Undefined project name"}
-            </p>
+          <div className="w-full h-full flex flex-col gap-y-4 items-start">
+            <div className="w-full h-fit flex flex-nowrap items-center justify-center gap-x-4">
+              <p className="text-xl w-fit max-w-[220px] truncate font-semibold break-words leading-thight">
+                {name || "Undefined project name"}
+              </p>
+              <div className="w-fit h-fit relative text-custom-gray-bright hover:cursor-help">
+                <InformationCircleIcon
+                  onMouseEnter={() => setInfoPopUp(true)}
+                  onMouseLeave={() => setInfoPopUp(false)}
+                  className="w-8 h-8"
+                />
+                {infoPopUp && (
+                  <div className="h-fit min-w-[300px] w-fit break-words absolute -top-3 left-12 bg-slate-600 py-2 px-3 rounded-lg text-white">
+                    {shortDescription}
+                  </div>
+                )}
+              </div>
+            </div>
 
             <div className="w-full py-1 flex flex-col items-center justify-center">
               <DateBox date={finished || "0000.00.00."} />

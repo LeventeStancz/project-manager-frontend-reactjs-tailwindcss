@@ -46,12 +46,12 @@ function CreateProjectModal({ show, closeModal }) {
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-y-4 py-2">
               <div className="flex flex-col gap-y-2">
-                <label htmlFor="subject" className="self-start text-xl">
+                <label htmlFor="name" className="self-start text-xl">
                   Name:
                 </label>
                 <input
                   type="text"
-                  id="subject"
+                  id="name"
                   autoComplete="off"
                   onChange={(e) => setName(e.target.value)}
                   value={name}
@@ -61,12 +61,12 @@ function CreateProjectModal({ show, closeModal }) {
                 />
               </div>
               <div className="flex flex-col gap-y-2">
-                <label htmlFor="Description" className="self-start text-xl">
+                <label htmlFor="shortDesc" className="self-start text-xl">
                   Short description:
                 </label>
                 <textarea
                   type="text"
-                  id="Description"
+                  id="shortDesct"
                   autoComplete="off"
                   onChange={(e) => setShortDesc(e.target.value)}
                   value={shortDesc}

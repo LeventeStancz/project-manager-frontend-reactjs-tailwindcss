@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import useAuth from "../hooks/useAuth";
+
+import useAxiosGetFetch from "../hooks/useAxiosGetFetch";
 
 import Searchbar from "../components/Dashboard/SearchBar";
 import FilterItem from "../components/Dashboard/FilterItem";
-
 import CreateProjectModal from "../components/Modals/Project/CreateProjectModal";
 import Projects from "../components/Dashboard/Projects";
+import HorizontalLine from "../components/Special/HorizontalLine";
 
 function DashboardLayout() {
   const [searching, setSearching] = useState(false);
@@ -17,64 +17,61 @@ function DashboardLayout() {
   });
   const [projects, setProjects] = useState([]);
   const [createProjectModal, setCreateProjectModal] = useState(false);
-  const { authToken } = useAuth();
-  const axiosPrivate = useAxiosPrivate();
+
+  const { data, loading, fetchError } = useAxiosGetFetch(`/projects`);
+
+  useEffect(() => {
+    if (!fetchError && data != null) {
+      setProjects(data.projects);
+    }
+  }, [data]);
 
   //for the searching state
   useEffect(() => {
     setSearching(query !== "" || filters.onlyActive || filters.onlyOwned);
   }, [query, filters.onlyActive, filters.onlyOwned]);
 
-  //filtering
+  //filtering - useMemo only run if [projects, query, filters.onlyActive, filters.onlyOwned] changes
   const filteredProjects = useMemo(() => {
-    let result = projects.filter((project) => {
-      return project.name.toLowerCase().includes(query.toLowerCase());
-    });
-    //onlyAcitve
-    if (filters.onlyActive) {
-      result.filter((project) => {
-        return project.isActive === true;
+    let result;
+    if (!searching) {
+      //recenlty viewed project (last 3)
+      result = projects
+        .sort((first, second) => {
+          return (
+            new Date(first.recentlyViewed) - new Date(second.recentlyViewed)
+          );
+        })
+        .slice(0, 3);
+    } else {
+      //query
+      result = projects.filter((project) => {
+        return (
+          project.name.toLowerCase().includes(query.toLowerCase()) ||
+          project.shortDescription.toLowerCase().includes(query.toLowerCase())
+        );
       });
-    }
-    //onlyOwned
-    if (filters.onlyOwned) {
-      result.filter((project) => {
-        return project.isOwner;
-      });
-    }
-    //both
-    if (filters.onlyActive && filters.onlyOwned) {
-      result.filter((project) => {
-        return project.isActive === true && project.isOwner;
-      });
+      //onlyAcitve
+      if (filters.onlyActive) {
+        result.filter((project) => {
+          return project.isActive;
+        });
+      }
+      //onlyOwned
+      if (filters.onlyOwned) {
+        result.filter((project) => {
+          return project.isOwner;
+        });
+      }
+      //both
+      if (filters.onlyActive && filters.onlyOwned) {
+        result.filter((project) => {
+          return project.isActive && project.isOwner;
+        });
+      }
     }
     return result;
   }, [projects, query, filters.onlyActive, filters.onlyOwned]);
-
-  /*useEffect(() => {
-    let isMounted = true;
-    const controller = new AbortController();
-    const getProjects = async () => {
-      try {
-        const response = await axiosPrivate.get(`/projects/${auth?.userid}`, {
-          signal: controller.signal,
-        });
-        isMounted && setProjects(response?.data?.projects);
-      } catch (error) {
-        if (!error.response?.data?.clientMsg || !error.response?.data?.error) {
-          console.log("Server offline. Try again later.");
-        } else {
-          console.log(error.response.data.clientMsg);
-          console.log(error.response.data.error);
-        }
-      }
-    };
-    getProjects();
-    return () => {
-      isMounted = false;
-      controller.abort();
-    };
-  }, []);*/
 
   return (
     <section className="w-full h-full flex flex-col p-5">
@@ -117,7 +114,7 @@ function DashboardLayout() {
       </div>
       <section className="w-full h-fit py-4">
         <div className="w-full flex justify-between items-end py-2">
-          <h2>{searching ? "Search results" : "Recently viewed projects:"}</h2>
+          <h2>{searching ? "Search results:" : "Recently viewed projects:"}</h2>
           <div
             onClick={() => setCreateProjectModal((prev) => !prev)}
             className="w-fit h-fit px-3 py-2 bg-slate-700 rounded-xl hover:cursor-pointer"
@@ -129,11 +126,25 @@ function DashboardLayout() {
             closeModal={() => setCreateProjectModal(false)}
           />
         </div>
-        <div className="w-full h-1 bg-custom-gray-light"></div>
-        <Projects projects={filteredProjects} />
-        <h2 className="py-2 mt-6">All project:</h2>
-        <div className="w-full h-1 bg-custom-gray-light"></div>
-        <Projects projects={projects} />
+        {loading ? (
+          <div>loading</div>
+        ) : (
+          <>
+            <HorizontalLine />
+            <Projects
+              projects={filteredProjects}
+              emptyText={
+                searching ? "No projects found." : "You are not in any project."
+              }
+            />
+            <h2 className="py-2 mt-6">All project:</h2>
+            <HorizontalLine />
+            <Projects
+              projects={projects}
+              emptyText={"You are not in any project."}
+            />
+          </>
+        )}
       </section>
     </section>
   );
