@@ -1,15 +1,10 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import ReactDOM from "react-dom";
-
 import { XCircleIcon } from "@heroicons/react/24/outline";
 
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import useAuth from "../../../hooks/useAuth";
 
 function CreateProjectModal({ show, closeModal }) {
-  const navigate = useNavigate();
-  const { authToken } = useAuth();
   const axiosPrivate = useAxiosPrivate();
   const [name, setName] = useState("");
   const [shortDesc, setShortDesc] = useState("");
@@ -18,8 +13,42 @@ function CreateProjectModal({ show, closeModal }) {
   const [finish, setFinish] = useState(new Date().toISOString().split("T")[0]);
   const [clientMsg, setClientMsg] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      const response = await axiosPrivate.post(
+        "/projects/create",
+        JSON.stringify({
+          name,
+          shortDescription: shortDesc,
+          description: desc,
+          finished: finishCB ? finish : undefined,
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+
+      //clear inputs
+      setName("");
+      setShortDesc("");
+      setDesc("");
+      setFinishCB(false);
+
+      setClientMsg(response?.data?.clientMsg);
+      setTimeout(() => {
+        closeModal();
+      }, 2000); //2sec
+    } catch (error) {
+      if (!error.response?.data?.clientMsg || !error.response?.data?.error) {
+        setClientMsg("Server offline. Try again later.");
+      } else {
+        setClientMsg(error.response.data.clientMsg);
+        console.log(error.response.data.error);
+      }
+    }
   };
 
   if (!show) return null;

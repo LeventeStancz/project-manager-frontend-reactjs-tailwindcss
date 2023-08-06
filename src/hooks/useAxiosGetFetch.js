@@ -4,6 +4,7 @@ import useAxiosPrivate from "./useAxiosPrivate";
 function useAxiosGetFetch(url) {
   const axiosPrivate = useAxiosPrivate();
   const [data, setData] = useState(null);
+  const [refetch, setRefetch] = useState(false);
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(null);
 
@@ -47,9 +48,9 @@ function useAxiosGetFetch(url) {
     };
 
     return cleanUp;
-  }, [url]);
+  }, [url, refetch]);
 
-  return { data, loading, fetchError };
+  return { data, loading, fetchError, setRefetch };
 }
 
 export default useAxiosGetFetch;

@@ -18,7 +18,8 @@ function DashboardLayout() {
   const [projects, setProjects] = useState([]);
   const [createProjectModal, setCreateProjectModal] = useState(false);
 
-  const { data, loading, fetchError } = useAxiosGetFetch(`/projects`);
+  const { data, loading, fetchError, setRefetch } =
+    useAxiosGetFetch(`/projects`);
 
   useEffect(() => {
     if (!fetchError && data != null) {
@@ -75,8 +76,10 @@ function DashboardLayout() {
 
   return (
     <section className="w-full h-full flex flex-col p-5">
-      <div className="w-full flex items-center py-3">
-        <h1 className="text-5xl">Dashboard</h1>
+      <div className="w-full flex items-end py-3">
+        <h1 className="leading-none text-6xl font-semibold text-custom-orange">
+          Dashboard
+        </h1>
         <div className="flex flex-nowrap flex-1 justify-end items-center space-x-6">
           <Searchbar
             fit={true}
@@ -114,7 +117,9 @@ function DashboardLayout() {
       </div>
       <section className="w-full h-fit py-4">
         <div className="w-full flex justify-between items-end py-2">
-          <h2>{searching ? "Search results:" : "Recently viewed projects:"}</h2>
+          <h2 className="text-lg">
+            {searching ? "Search results:" : "Recently viewed projects:"}
+          </h2>
           <div
             onClick={() => setCreateProjectModal((prev) => !prev)}
             className="w-fit h-fit px-3 py-2 bg-slate-700 rounded-xl hover:cursor-pointer"
@@ -123,7 +128,10 @@ function DashboardLayout() {
           </div>
           <CreateProjectModal
             show={createProjectModal}
-            closeModal={() => setCreateProjectModal(false)}
+            closeModal={() => {
+              setCreateProjectModal(false);
+              setRefetch((prev) => !prev);
+            }}
           />
         </div>
         {loading ? (
@@ -137,7 +145,7 @@ function DashboardLayout() {
                 searching ? "No projects found." : "You are not in any project."
               }
             />
-            <h2 className="py-2 mt-6">All project:</h2>
+            <h2 className="py-2 mt-6 text-lg">All project:</h2>
             <HorizontalLine />
             <Projects
               projects={projects}
