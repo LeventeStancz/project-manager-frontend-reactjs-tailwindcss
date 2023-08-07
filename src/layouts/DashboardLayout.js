@@ -34,10 +34,9 @@ function DashboardLayout() {
 
   //filtering - useMemo only run if [projects, query, filters.onlyActive, filters.onlyOwned] changes
   const filteredProjects = useMemo(() => {
-    let result;
     if (!searching) {
       //recenlty viewed project (last 3)
-      result = projects
+      return projects
         .sort((first, second) => {
           return (
             new Date(first.recentlyViewed) - new Date(second.recentlyViewed)
@@ -46,7 +45,7 @@ function DashboardLayout() {
         .slice(0, 3);
     } else {
       //query
-      result = projects.filter((project) => {
+      let result = projects.filter((project) => {
         return (
           project.name.toLowerCase().includes(query.toLowerCase()) ||
           project.shortDescription.toLowerCase().includes(query.toLowerCase())
@@ -54,25 +53,25 @@ function DashboardLayout() {
       });
       //onlyAcitve
       if (filters.onlyActive) {
-        result.filter((project) => {
+        result = result.filter((project) => {
           return project.isActive;
         });
       }
       //onlyOwned
       if (filters.onlyOwned) {
-        result.filter((project) => {
+        result = result.filter((project) => {
           return project.isOwner;
         });
       }
       //both
       if (filters.onlyActive && filters.onlyOwned) {
-        result.filter((project) => {
+        result = result.filter((project) => {
           return project.isActive && project.isOwner;
         });
       }
+      return result;
     }
-    return result;
-  }, [projects, query, filters.onlyActive, filters.onlyOwned]);
+  }, [projects, query, filters.onlyActive, filters.onlyOwned, searching]);
 
   return (
     <section className="w-full h-full flex flex-col p-5">
