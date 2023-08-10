@@ -33,7 +33,7 @@ function ProjectLayout() {
     <section className="w-full h-full flex flex-col p-5">
       <div className="w-full flex justify-between items-center pt-2 pb-6">
         <ProjectHeader project={project} />
-        <div className="flex items-start gap-x-8">
+        <div className="flex items-center gap-x-8">
           {location.pathname.substring(
             location.pathname.lastIndexOf("/") + 1
           ) === "tasks" && (

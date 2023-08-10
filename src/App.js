@@ -14,6 +14,7 @@ import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 import ProjectLayout from "./layouts/ProjectLayout/ProjectLayout";
 import TaskLayout from "./layouts/ProjectLayout/TaskLayout/TaskLayout";
+import CreateTaskLayout from "./layouts/ProjectLayout/CreateTaskLayout";
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
               <Route index path="/" element={<DashboardLayout />} />
               <Route path="/project" element={<ProjectLayout />}>
                 <Route path=":projectname/tasks" element={<TaskLayout />} />
+                <Route
+                  path=":projectname/create"
+                  element={<CreateTaskLayout />}
+                />
               </Route>
             </Route>
           </Route>

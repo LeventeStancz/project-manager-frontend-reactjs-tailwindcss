@@ -7,7 +7,7 @@ function ProjectHeader({ project }) {
   const [favorite, setFavorite] = useState(false);
 
   return (
-    <div className="w-fit flex flex-nowrap items-end gap-x-8">
+    <div className="w-fit flex flex-nowrap items-end gap-x-8 py-2">
       <h1 className="leading-none text-4xl font-semibold text-custom-orange">
         {project?.name}
       </h1>

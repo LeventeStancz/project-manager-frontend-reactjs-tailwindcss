@@ -22,7 +22,7 @@ function TaskLayout() {
   );
 
   useEffect(() => {
-    if (data) {
+    if (!fetchError && data != null) {
       setTodos(data?.todos);
       setInprogs(data?.inprogs);
       setDones(data?.dones);

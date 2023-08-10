@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 function ProjectNavbar({ project }) {
   return (
     <div>
-      <ul className="flex gap-x-4">
+      <ul className="flex items-center gap-x-4">
         <NavLink to={`/project/${project?.name}/tasks`}>
           {({ isActive }) => {
             return (
