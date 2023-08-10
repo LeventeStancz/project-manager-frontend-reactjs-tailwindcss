@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import useAxiosGetFetch from "../../hooks/useAxiosGetFetch";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 function CreateTaskLayout() {
+  const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
   const { projectname } = useParams();
   const [title, setTitle] = useState("");
@@ -53,6 +54,16 @@ function CreateTaskLayout() {
       );
 
       setClientMsg(response?.data?.clientMsg);
+      //clear fields
+      setTimeout(() => {
+        setClientMsg("");
+        setTitle("");
+        setShortDesc("");
+        setDesc("");
+        setDeadline(new Date().toISOString().split("T")[0]);
+        setDeadlineCB(false);
+        navigate(`/project/${projectname}/tasks`, { replace: false });
+      }, 2000); //2sec
     } catch (error) {
       if (!error.response?.data?.clientMsg || !error.response?.data?.error) {
         setClientMsg("Server offline. Try again later.");
