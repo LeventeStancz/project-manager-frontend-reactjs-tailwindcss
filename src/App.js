@@ -1,4 +1,4 @@
-import { Routes, Route, useRoutes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 //auth
 import RequireAuth from "./contexts/RequireAuth";
@@ -13,7 +13,7 @@ import RootLayout from "./layouts/RootLayout";
 import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 import ProjectLayout from "./layouts/ProjectLayout/ProjectLayout";
-import TaskLayout from "./layouts/ProjectLayout/TaskLayout";
+import TaskLayout from "./layouts/ProjectLayout/TaskLayout/TaskLayout";
 
 function App() {
   return (
