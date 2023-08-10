@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Outlet, useLocation } from "react-router-dom";
 
 import useAxiosGetFetch from "../../hooks/useAxiosGetFetch";
+import useIsAdmin from "../../hooks/useIsAdmin";
 
 import Searchbar from "../../components/Dashboard/SearchBar";
 import ProjectHeader from "../../components/ProjectLayout/ProjectHeader";
 import ProjectNavbar from "../../components/ProjectLayout/ProjectNavbar";
 
 function ProjectLayout() {
+  const { isAdmin } = useIsAdmin();
   const navigate = useNavigate();
   const location = useLocation();
   const { projectname } = useParams();
@@ -29,9 +31,9 @@ function ProjectLayout() {
 
   return (
     <section className="w-full h-full flex flex-col p-5">
-      <div className="w-full flex justify-between items-end pt-2 pb-6">
+      <div className="w-full flex justify-between items-center pt-2 pb-6">
         <ProjectHeader project={project} />
-        <div className="flex gap-x-8">
+        <div className="flex items-start gap-x-8">
           {location.pathname.substring(
             location.pathname.lastIndexOf("/") + 1
           ) === "tasks" && (
@@ -43,10 +45,9 @@ function ProjectLayout() {
               popup={"Search task by name or short description."}
             />
           )}
-          <ProjectNavbar project={project} />
+          {(project?.isOwner || isAdmin) && <ProjectNavbar project={project} />}
         </div>
       </div>
-
       {loading ? <div>loading</div> : <Outlet />}
     </section>
   );
