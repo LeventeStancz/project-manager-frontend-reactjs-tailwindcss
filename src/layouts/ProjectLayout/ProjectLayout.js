@@ -48,7 +48,7 @@ function ProjectLayout() {
           {(project?.isOwner || isAdmin) && <ProjectNavbar project={project} />}
         </div>
       </div>
-      {loading ? <div>loading</div> : <Outlet />}
+      {loading ? <div>loading</div> : <Outlet context={[query, setQuery]} />}
     </section>
   );
 }
