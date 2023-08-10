@@ -20,7 +20,7 @@ function CreateProjectModal({ show, closeModal }) {
       const response = await axiosPrivate.post(
         "/projects/create",
         JSON.stringify({
-          name,
+          name: name.replace(/\s+/g, "-"),
           shortDescription: shortDesc,
           description: desc,
           finished: finishCB ? finish : undefined,
@@ -82,7 +82,7 @@ function CreateProjectModal({ show, closeModal }) {
                   type="text"
                   id="name"
                   autoComplete="off"
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => setName(e.target.value.replace(/\s+/g, "-"))}
                   value={name}
                   maxLength="32"
                   required
