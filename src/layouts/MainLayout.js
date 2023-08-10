@@ -26,7 +26,7 @@ function MainLayout() {
             text={"Dashboard"}
           />
           <SidebarItem
-            href="/project/recent"
+            href="/project"
             icon={<Square3Stack3DIcon className="w-7 h-7" />}
             text={"Project"}
           />

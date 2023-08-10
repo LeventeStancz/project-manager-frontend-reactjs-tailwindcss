@@ -15,7 +15,7 @@ function ProjectCard({
 }) {
   const [infoPopUp, setInfoPopUp] = useState(false);
   return (
-    <NavLink to={`/project/${name}`}>
+    <NavLink to={`/project/${name}/tasks`}>
       <div className="w-64 h-fit hover:cursor-pointer">
         <div className="bg-custom-gray-base rounded-xl px-4 py-3 hover:cursor-pointer">
           <div className="flex flex-col gap-y-4 items-start ">

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useRoutes } from "react-router-dom";
 
 //auth
 import RequireAuth from "./contexts/RequireAuth";
@@ -12,6 +12,8 @@ import Login from "./pages/register-login/Login";
 import RootLayout from "./layouts/RootLayout";
 import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
+import ProjectLayout from "./layouts/ProjectLayout/ProjectLayout";
+import TaskLayout from "./layouts/ProjectLayout/TaskLayout";
 
 function App() {
   return (
@@ -27,6 +29,9 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route element={<MainLayout />}>
               <Route index path="/" element={<DashboardLayout />} />
+              <Route path="/project" element={<ProjectLayout />}>
+                <Route path=":projectname/tasks" element={<TaskLayout />} />
+              </Route>
             </Route>
           </Route>
         </Route>

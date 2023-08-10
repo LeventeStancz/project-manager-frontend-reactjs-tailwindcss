@@ -39,7 +39,7 @@ function DashboardLayout() {
       return projects
         .sort((first, second) => {
           return (
-            new Date(first.recentlyViewed) - new Date(second.recentlyViewed)
+            new Date(second.recentlyViewed) - new Date(first.recentlyViewed)
           );
         })
         .slice(0, 3);
