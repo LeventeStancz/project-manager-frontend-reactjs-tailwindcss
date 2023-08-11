@@ -36,6 +36,9 @@ const TaskColumn = ({ loading, id, tasks }) => {
                       .sort((a, b) => {
                         return order[b.priority] - order[a.priority];
                       })
+                      .sort((a, b) => {
+                        return new Date(b.deadline) - new Date(a.deadline);
+                      })
                       .map((task, index) => {
                         return (
                           <TaskCard key={task?._id} index={index} task={task} />
