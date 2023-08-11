@@ -9,7 +9,7 @@ const TaskCard = ({ task, index }) => {
 
   const bgColor = () => {
     return task.status === "todo"
-      ? "bg-custom-gray-bright"
+      ? "bg-custom-gray-light"
       : task.status === "inprogress"
       ? "bg-custom-yellow-card"
       : "bg-custom-green";
@@ -30,16 +30,16 @@ const TaskCard = ({ task, index }) => {
               className={
                 (snapshot.isDragging &&
                   " outline outline-2 outline-custom-blue ") +
-                " min-w-[240px] w-full max-w-[360px] min-h-[140px] h-fit max-h-[160px] bg-custom-gray-light rounded-xl flex flex-row flex-nowrap"
+                " min-w-[240px] w-full max-w-[360px] min-h-[120px] h-fit max-h-[180px] bg-custom-gray-base rounded-xl flex flex-row flex-nowrap"
               }
             >
               <div>
                 <div className={bgColor() + " w-6 h-full rounded-l-xl"}></div>
               </div>
-              <div className="w-full flex flex-col p-3 justify-between">
-                <div className="w-full flex flex-col justify-center">
+              <div className="w-full flex flex-col p-3 gap-y-3">
+                <div className="w-full flex flex-col gap-y-2 justify-center">
                   <h1 className="text-xl font-semibold">{task.title}</h1>
-                  <h2 className="text-custom-gray-bright">
+                  <h2 className="text-custom-gray-bright font-medium">
                     {task?.shortDescription}
                   </h2>
                 </div>
