@@ -2,6 +2,12 @@ import { Droppable } from "react-beautiful-dnd";
 
 import TaskCard from "./TaskCard";
 
+var order = {
+  low: 0,
+  normal: 1,
+  high: 2,
+};
+
 const TaskColumn = ({ loading, id, tasks }) => {
   if (tasks) {
     return (
@@ -22,15 +28,19 @@ const TaskColumn = ({ loading, id, tasks }) => {
                   }
                 >
                   {tasks.length === 0 ? (
-                    <h1 className="text-xl text-custom-purple">
+                    <h1 className="text-2xl text-custom-purple text-center">
                       Nothing yet...
                     </h1>
                   ) : (
-                    tasks.map((task, index) => {
-                      return (
-                        <TaskCard key={task?._id} index={index} task={task} />
-                      );
-                    })
+                    tasks
+                      .sort((a, b) => {
+                        return order[b.priority] - order[a.priority];
+                      })
+                      .map((task, index) => {
+                        return (
+                          <TaskCard key={task?._id} index={index} task={task} />
+                        );
+                      })
                   )}
                   {provided.placeholder}
                 </div>
@@ -42,9 +52,9 @@ const TaskColumn = ({ loading, id, tasks }) => {
     );
   } else {
     return (
-      <div className="text-2xl text-custom-purple text-center">
+      <h1 className="text-2xl text-custom-purple text-center">
         Nothing yet...
-      </div>
+      </h1>
     );
   }
 };
