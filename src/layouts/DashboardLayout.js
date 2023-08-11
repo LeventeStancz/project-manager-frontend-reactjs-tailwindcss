@@ -47,7 +47,10 @@ function DashboardLayout() {
       //query
       let result = projects.filter((project) => {
         return (
-          project.name.toLowerCase().includes(query.toLowerCase()) ||
+          project.name
+            .replace(/\s+/g, "-")
+            .toLowerCase()
+            .includes(query.replace(/\s+/g, "-").toLowerCase()) ||
           project.shortDescription.toLowerCase().includes(query.toLowerCase())
         );
       });
