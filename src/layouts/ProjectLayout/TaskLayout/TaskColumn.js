@@ -34,10 +34,10 @@ const TaskColumn = ({ loading, id, tasks }) => {
                   ) : (
                     tasks
                       .sort((a, b) => {
-                        return order[b.priority] - order[a.priority];
+                        return new Date(a.deadline) - new Date(b.deadline);
                       })
                       .sort((a, b) => {
-                        return new Date(b.deadline) - new Date(a.deadline);
+                        return order[b.priority] - order[a.priority];
                       })
                       .map((task, index) => {
                         return (
