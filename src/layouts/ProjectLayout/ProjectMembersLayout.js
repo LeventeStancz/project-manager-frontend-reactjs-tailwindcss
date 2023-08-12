@@ -1,4 +1,5 @@
 import AddMemberToProject from "../../components/Members/AddMemberToProject";
+import RemoveMemberFromProject from "../../components/Members/RemoveMemberFromProject";
 
 function ProjectMembersLayout() {
   return (
@@ -7,6 +8,7 @@ function ProjectMembersLayout() {
         <h1 className="text-3xl text-semibold">Add member to project:</h1>
         <AddMemberToProject />
         <h1 className="text-3xl text-semibold">Remove member from project:</h1>
+        <RemoveMemberFromProject />
       </div>
     </div>
   );

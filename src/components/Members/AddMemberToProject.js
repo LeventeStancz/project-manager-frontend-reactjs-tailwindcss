@@ -41,6 +41,7 @@ function AddMemberToProject() {
       );
 
       setClientMsg(response?.data?.clientMsg);
+      setRefetch((prev) => !prev);
     } catch (error) {
       if (!error.response?.data?.clientMsg || !error.response?.data?.error) {
         setClientMsg("Server offline. Try again later.");
