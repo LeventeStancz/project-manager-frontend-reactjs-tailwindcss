@@ -15,6 +15,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import ProjectLayout from "./layouts/ProjectLayout/ProjectLayout";
 import TaskLayout from "./layouts/ProjectLayout/TaskLayout/TaskLayout";
 import CreateTaskLayout from "./layouts/ProjectLayout/CreateTaskLayout";
+import ProjectMembersLayout from "./layouts/ProjectLayout/ProjectMembersLayout";
 
 function App() {
   return (
@@ -35,6 +36,10 @@ function App() {
                 <Route
                   path=":projectname/create"
                   element={<CreateTaskLayout />}
+                />
+                <Route
+                  path=":projectname/members"
+                  element={<ProjectMembersLayout />}
                 />
               </Route>
             </Route>
