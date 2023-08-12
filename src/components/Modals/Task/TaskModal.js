@@ -7,13 +7,13 @@ import ReactDOM from "react-dom";
 const TaskModal = ({ show, closeModal, task }) => {
   if (!show) return null;
   return ReactDOM.createPortal(
-    <div>
+    <div className="overflow-y-scroll overflow-x-hidden">
       <div
         onClick={closeModal}
         className="h-screen w-full fixed top-0 backdrop-blur-sm"
       ></div>
       <div className="h-fit w-fit fixed top-20 left-1/2 -translate-x-1/2 z-50 flex justify-center items-start">
-        <div className="w-fit min-w-[740px] max-h-full p-6 z-50 bg-custom-gray-base rounded-2xl overflow-y-scroll overflow-x-hide">
+        <div className="w-fit min-w-[740px] max-h-full p-6 z-50 bg-custom-gray-base rounded-2xl">
           <div className="flex items-center justify-between mb-4">
             <div className="w-full flex items-center gap-x-4 text-lg">
               <h1 className="w-full text-3xl font-bold text-custom-blue">

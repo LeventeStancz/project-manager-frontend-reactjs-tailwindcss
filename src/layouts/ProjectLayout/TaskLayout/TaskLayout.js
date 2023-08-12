@@ -9,6 +9,8 @@ import TaskColumn from "./TaskColumn";
 import HorizontalLine from "../../../components/Special/HorizontalLine";
 import VerticalLine from "../../../components/Special/VerticalLine";
 
+const statuses = ["todo", "inprogress", "done"];
+
 function TaskLayout() {
   const axiosPrivate = useAxiosPrivate();
   const { projectname } = useParams();
@@ -33,6 +35,7 @@ function TaskLayout() {
     const { destination, source, draggableId } = result;
     if (!destination) return;
     if (destination.droppableId === source.droppableId) return;
+    if (!statuses.includes(destination.droppableId)) return;
     try {
       await axiosPrivate.patch(
         `/tasks/update/status/${projectname}/${draggableId}`,
@@ -54,6 +57,54 @@ function TaskLayout() {
     }
     setRefetch((prev) => !prev);
   };
+
+  //filtering - useMemo only run if [query] changes
+  useEffect(() => {
+    if (query) {
+      setTodos((prev) =>
+        prev
+          .filter((task) => {
+            return (
+              task.title.toLowerCase().includes(query.toLowerCase()) ||
+              task.shortDescription.toLowerCase().includes(query.toLowerCase())
+            );
+          })
+          .sort((first, second) => {
+            return new Date(second.deadline) - new Date(first.deadline);
+          })
+      );
+      setInprogs((prev) =>
+        prev
+          .filter((task) => {
+            return (
+              task.title.toLowerCase().includes(query.toLowerCase()) ||
+              task.shortDescription.toLowerCase().includes(query.toLowerCase())
+            );
+          })
+          .sort((first, second) => {
+            return new Date(second.deadline) - new Date(first.deadline);
+          })
+      );
+      setDones((prev) =>
+        prev
+          .filter((task) => {
+            return (
+              task.title.toLowerCase().includes(query.toLowerCase()) ||
+              task.shortDescription.toLowerCase().includes(query.toLowerCase())
+            );
+          })
+          .sort((first, second) => {
+            return new Date(second.deadline) - new Date(first.deadline);
+          })
+      );
+    } else {
+      if (!fetchError && data != null) {
+        setTodos(data?.todos);
+        setInprogs(data?.inprogs);
+        setDones(data?.dones);
+      }
+    }
+  }, [query, data]);
 
   return loading ? (
     <div className="w-full h-full flex flex-col items-center justify-center">

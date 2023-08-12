@@ -16,21 +16,19 @@ const TaskCard = ({ task, index }) => {
   };
 
   return (
-    <Draggable draggableId={`${task?._id}`} key={task?._id} index={index}>
-      {(provided, snapshot) => {
-        return (
-          <div
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            className=" w-full flex flex-col items-center px-4 hover:cursor-pointer"
-          >
+    <div className=" w-fit flex flex-col items-center px-4">
+      <Draggable draggableId={`${task?._id}`} key={task?._id} index={index}>
+        {(provided, snapshot) => {
+          return (
             <div
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
               onClick={() => setTaskModal((prev) => !prev)}
               className={
                 (snapshot.isDragging &&
                   " outline outline-2 outline-custom-blue ") +
-                " min-w-[240px] w-full max-w-[360px] min-h-[120px] h-fit max-h-[180px] bg-custom-gray-base rounded-xl flex flex-row flex-nowrap"
+                " min-w-[320px] w-fit max-w-[360px] min-h-[120px] h-fit max-h-[180px] bg-custom-gray-base rounded-xl flex flex-row flex-nowrap hover:cursor-pointer"
               }
             >
               <div>
@@ -48,17 +46,18 @@ const TaskCard = ({ task, index }) => {
                   <PriorityBox priority={task?.priority} />
                 </div>
               </div>
+
+              {provided.placeholder}
             </div>
-            <TaskModal
-              show={taskModal}
-              closeModal={() => setTaskModal(false)}
-              task={task}
-            />
-            {provided.placeholder}
-          </div>
-        );
-      }}
-    </Draggable>
+          );
+        }}
+      </Draggable>
+      <TaskModal
+        show={taskModal}
+        closeModal={() => setTaskModal(false)}
+        task={task}
+      />
+    </div>
   );
 };
 
