@@ -28,13 +28,13 @@ const TaskCard = ({ task, index }) => {
               className={
                 (snapshot.isDragging &&
                   " outline outline-2 outline-custom-blue ") +
-                " min-w-[320px] w-fit max-w-[360px] min-h-[120px] h-fit max-h-[180px] bg-custom-gray-base rounded-xl flex flex-row flex-nowrap hover:cursor-pointer"
+                " w-[360px] h-fit bg-custom-gray-base rounded-xl flex flex-row flex-nowrap hover:cursor-pointer"
               }
             >
               <div>
                 <div className={bgColor() + " w-6 h-full rounded-l-xl"}></div>
               </div>
-              <div className="w-full flex flex-col p-3 gap-y-3">
+              <div className="h-full w-full flex flex-col p-3 gap-y-3">
                 <div className="w-full flex flex-col gap-y-2 justify-center">
                   <h1 className="text-xl font-semibold">{task.title}</h1>
                   <h2 className="text-custom-gray-bright font-medium">
@@ -46,7 +46,6 @@ const TaskCard = ({ task, index }) => {
                   <PriorityBox priority={task?.priority} />
                 </div>
               </div>
-
               {provided.placeholder}
             </div>
           );
