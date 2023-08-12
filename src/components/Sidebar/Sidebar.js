@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 import {
@@ -9,9 +10,20 @@ import {
 import useLogout from "../../hooks/useLogout";
 import useSidebar from "../../hooks/useSidebar";
 
+import useAxiosGetFetch from "../../hooks/useAxiosGetFetch";
+
 export default function Sidebar({ children }) {
+  const [user, setUser] = useState({});
   const { expanded, setExpanded } = useSidebar();
   const logout = useLogout();
+
+  const { data, loading, fetchError, setRefetch } = useAxiosGetFetch(`/users`);
+
+  useEffect(() => {
+    if (!fetchError && data != null) {
+      setUser(data.user);
+    }
+  }, [data]);
 
   return (
     <aside className="h-full">
@@ -81,8 +93,12 @@ export default function Sidebar({ children }) {
           `}
             >
               <div className="leading-4 truncate text-custom-gray-bright">
-                <h4 className="font-semibold truncate text-white">John Doe</h4>
-                <span className="text-xs">johndoe@gmail.com</span>
+                <NavLink to="/profile">
+                  <h4 className="font-semibold truncate text-white hover:underline hover:cursor-pointer">
+                    {user?.username}
+                  </h4>
+                </NavLink>
+                <span className="text-xs">{user?.email}</span>
               </div>
             </div>
           </div>
