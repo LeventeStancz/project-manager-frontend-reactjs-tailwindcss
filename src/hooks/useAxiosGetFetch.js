@@ -15,7 +15,7 @@ function useAxiosGetFetch(url) {
     const fetch = async (dataUrl) => {
       setLoading(true);
       try {
-        const response = await axiosPrivate.get(url, {
+        const response = await axiosPrivate.get(dataUrl, {
           signal: controller.signal,
         });
         if (isMounted) {

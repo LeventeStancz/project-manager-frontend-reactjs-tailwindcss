@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import Skeleton from "react-loading-skeleton";
+
 import useAxiosGetFetch from "../../hooks/useAxiosGetFetch";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
@@ -58,19 +60,23 @@ function RemoveMemberFromProject() {
     <div className="flex flex-col gap-y-2 py-6">
       <div className="flex flex-row items-center gap-x-6">
         <div>
-          <select
-            value={removeMember}
-            onChange={(e) => setRemoveMember(e.target.value)}
-            className="w-72 font-medium h-fit bg-custom-gray-base py-3 rounded-xl ring-2 ring-zinc-500 focus:ring-2 focus:ring-custom-purple focus:outline-none focus:border-0 outline-none border-0"
-          >
-            {members.map((user) => {
-              return (
-                <option key={user._id} value={user._id}>
-                  {(user.isOwner ? "#Owner - " : "") + user.username}
-                </option>
-              );
-            })}
-          </select>
+          {loading ? (
+            <Skeleton width={290} height={44} />
+          ) : (
+            <select
+              value={removeMember}
+              onChange={(e) => setRemoveMember(e.target.value)}
+              className="w-72 font-medium h-fit bg-custom-gray-base py-3 rounded-xl ring-2 ring-zinc-500 focus:ring-2 focus:ring-custom-purple focus:outline-none focus:border-0 outline-none border-0"
+            >
+              {members.map((user) => {
+                return (
+                  <option key={user._id} value={user._id}>
+                    {(user.isOwner ? "#Owner - " : "") + user.username}
+                  </option>
+                );
+              })}
+            </select>
+          )}
         </div>
         <div>
           <div

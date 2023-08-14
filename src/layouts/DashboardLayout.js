@@ -1,5 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 
+import ProjectCardSkeleton from "../components/Skeletons/ProjectCardSkeleton";
+
 import useAxiosGetFetch from "../hooks/useAxiosGetFetch";
 
 import Searchbar from "../components/Dashboard/SearchBar";
@@ -136,24 +138,30 @@ function DashboardLayout() {
             }}
           />
         </div>
+        <HorizontalLine />
         {loading ? (
-          <div>loading</div>
+          <div className="flex flex-wrap gap-10 mt-10">
+            <ProjectCardSkeleton cardsCount={3} />
+          </div>
         ) : (
-          <>
-            <HorizontalLine />
-            <Projects
-              projects={filteredProjects}
-              emptyText={
-                searching ? "No projects found." : "You are not in any project."
-              }
-            />
-            <h2 className="py-2 mt-6 text-lg">All project:</h2>
-            <HorizontalLine />
-            <Projects
-              projects={projects}
-              emptyText={"You are not in any project."}
-            />
-          </>
+          <Projects
+            projects={filteredProjects}
+            emptyText={
+              searching ? "No projects found." : "You are not in any project."
+            }
+          />
+        )}
+        <h2 className="py-2 mt-6 text-lg">All project:</h2>
+        <HorizontalLine />
+        {loading ? (
+          <div className="flex flex-wrap gap-10 mt-10">
+            <ProjectCardSkeleton cardsCount={4} />
+          </div>
+        ) : (
+          <Projects
+            projects={projects}
+            emptyText={"You are not in any project."}
+          />
         )}
       </section>
     </section>

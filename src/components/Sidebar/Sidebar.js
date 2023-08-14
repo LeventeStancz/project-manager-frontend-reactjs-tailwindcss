@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
+import Skeleton from "react-loading-skeleton";
+
 import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
@@ -95,10 +97,12 @@ export default function Sidebar({ children }) {
               <div className="leading-4 truncate text-custom-gray-bright">
                 <NavLink to="/profile">
                   <h4 className="font-semibold truncate text-white hover:underline hover:cursor-pointer">
-                    {user?.username}
+                    {loading ? <Skeleton width={100} /> : user?.username}
                   </h4>
                 </NavLink>
-                <span className="text-xs">{user?.email}</span>
+                <span className="text-xs">
+                  {loading ? <Skeleton width={140} /> : user?.email}
+                </span>
               </div>
             </div>
           </div>

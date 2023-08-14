@@ -106,11 +106,7 @@ function TaskLayout() {
     }
   }, [query, data]);
 
-  return loading ? (
-    <div className="w-full h-full flex flex-col items-center justify-center">
-      loading
-    </div>
-  ) : (
+  return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <div className="w-full h-full flex flex-row justify-between overflow-y-hidden overflow-x-hidden">
         <div className="w-full h-full flex flex-col">
@@ -121,7 +117,7 @@ function TaskLayout() {
             <HorizontalLine />
           </div>
           <div className="p-2 w-full overflow-y-scroll overflow-x-hidden no-scrollbar">
-            <TaskColumn id={"todo"} tasks={todos} />
+            <TaskColumn loading={loading} id={"todo"} tasks={todos} />
           </div>
         </div>
         <VerticalLine />
@@ -133,7 +129,7 @@ function TaskLayout() {
             <HorizontalLine />
           </div>
           <div className="p-2 w-full overflow-y-scroll overflow-x-hidden no-scrollbar">
-            <TaskColumn id={"inprogress"} tasks={inprogs} />
+            <TaskColumn loading={loading} id={"inprogress"} tasks={inprogs} />
           </div>
         </div>
         <VerticalLine />
@@ -145,7 +141,7 @@ function TaskLayout() {
             <HorizontalLine />
           </div>
           <div className="p-2 w-full overflow-y-scroll overflow-x-hidden no-scrollbar">
-            <TaskColumn id={"done"} tasks={dones} />
+            <TaskColumn loading={loading} id={"done"} tasks={dones} />
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Droppable } from "react-beautiful-dnd";
 
 import TaskCard from "./TaskCard";
+import TaskCardSkeleton from "../../../components/Skeletons/TaskCardSkeleton";
 
 var order = {
   low: 0,
@@ -13,7 +14,9 @@ const TaskColumn = ({ loading, id, tasks }) => {
     return (
       <div className=" w-full h-fit">
         {loading ? (
-          <div className="w-full mt-10 flex flex-col items-center">loading</div>
+          <div className="w-full py-6 flex flex-col items-center gap-y-8">
+            <TaskCardSkeleton />
+          </div>
         ) : (
           <Droppable droppableId={id}>
             {(provided, snapshot) => {

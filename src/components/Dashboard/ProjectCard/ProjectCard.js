@@ -47,7 +47,7 @@ function ProjectCard({
             </div>
           </div>
         </div>
-      </div>{" "}
+      </div>
     </NavLink>
   );
 }

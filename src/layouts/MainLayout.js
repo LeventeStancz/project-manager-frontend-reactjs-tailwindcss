@@ -16,6 +16,7 @@ import useIsAdmin from "../hooks/useIsAdmin";
 
 function MainLayout() {
   const { isAdmin } = useIsAdmin();
+
   return (
     <div className="h-full w-full flex flex-row flex-nowrap">
       <SidebarProvider>

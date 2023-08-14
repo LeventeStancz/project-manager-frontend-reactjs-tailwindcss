@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import Skeleton from "react-loading-skeleton";
+
 import useAxiosGetFetch from "../../hooks/useAxiosGetFetch";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
@@ -152,19 +154,23 @@ function CreateTaskLayout() {
                 </h2>
               </div>
               <div>
-                <select
-                  value={assignedTo}
-                  onChange={(e) => setAssignedTo(e.target.value)}
-                  className="w-72 bg-custom-gray-base rounded-lg ring-1 ring-zinc-500 focus:ring-2 focus:ring-custom-purple focus:outline-none border-0"
-                >
-                  {users.map((user) => {
-                    return (
-                      <option key={user?._id} value={user?._id}>
-                        {(user?.isOwner ? "#Owner - " : "") + user?.username}
-                      </option>
-                    );
-                  })}
-                </select>
+                {loading ? (
+                  <Skeleton width={280} height={40} />
+                ) : (
+                  <select
+                    value={assignedTo}
+                    onChange={(e) => setAssignedTo(e.target.value)}
+                    className="w-72 bg-custom-gray-base rounded-lg ring-1 ring-zinc-500 focus:ring-2 focus:ring-custom-purple focus:outline-none border-0"
+                  >
+                    {users.map((user) => {
+                      return (
+                        <option key={user?._id} value={user?._id}>
+                          {(user?.isOwner ? "#Owner - " : "") + user?.username}
+                        </option>
+                      );
+                    })}
+                  </select>
+                )}
               </div>
             </div>
             <div className="flex flex-nowrap items-center justify-between">
