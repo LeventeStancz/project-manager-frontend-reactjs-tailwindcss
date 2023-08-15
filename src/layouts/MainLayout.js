@@ -31,11 +31,12 @@ function MainLayout() {
             icon={<Square3Stack3DIcon className="w-7 h-7" />}
             text={"Project"}
           />
+          {/*
           <SidebarItem
             href="/invites"
             icon={<BellIcon className="w-7 h-7" />}
             text={"Invites"}
-          />
+  />*/}
           <SidebarItem
             href="/profile"
             icon={<UserIcon className="w-7 h-7" />}
