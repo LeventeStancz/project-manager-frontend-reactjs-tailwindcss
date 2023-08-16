@@ -62,8 +62,8 @@ function AddMemberToProject() {
   }, [clientMsg]);
 
   return (
-    <div className="flex flex-col gap-y-2 py-6">
-      <div className="flex flex-row gap-x-10">
+    <div className="w-full flex flex-col gap-y-2 py-6">
+      <div className="w-full flex flex-row justify-between gap-x-10">
         <div>
           <SearchSelector
             inputValue={searctInput}
