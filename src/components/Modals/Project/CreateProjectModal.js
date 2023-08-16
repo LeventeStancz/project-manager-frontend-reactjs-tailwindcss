@@ -24,11 +24,7 @@ function CreateProjectModal({ show, closeModal }) {
           shortDescription: shortDesc,
           description: desc,
           finished: finishCB ? finish : undefined,
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
+        })
       );
 
       //clear inputs

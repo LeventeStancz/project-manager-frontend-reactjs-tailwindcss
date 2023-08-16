@@ -12,10 +12,12 @@ import Login from "./pages/register-login/Login";
 import RootLayout from "./layouts/RootLayout";
 import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
+///project related
 import ProjectLayout from "./layouts/ProjectLayout/ProjectLayout";
 import TaskLayout from "./layouts/ProjectLayout/TaskLayout/TaskLayout";
 import CreateTaskLayout from "./layouts/ProjectLayout/CreateTaskLayout";
 import ProjectMembersLayout from "./layouts/ProjectLayout/ProjectMembersLayout";
+import EditProjectLayout from "./layouts/ProjectLayout/EditProjectLayout";
 
 function App() {
   return (
@@ -40,6 +42,10 @@ function App() {
                 <Route
                   path=":projectname/members"
                   element={<ProjectMembersLayout />}
+                />
+                <Route
+                  path=":projectname/edit"
+                  element={<EditProjectLayout />}
                 />
               </Route>
             </Route>

@@ -41,11 +41,7 @@ function TaskLayout() {
         `/tasks/update/status/${projectname}/${draggableId}`,
         JSON.stringify({
           status: destination.droppableId,
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
+        })
       );
     } catch (error) {
       if (!error.response?.data?.clientMsg || !error.response?.data?.error) {

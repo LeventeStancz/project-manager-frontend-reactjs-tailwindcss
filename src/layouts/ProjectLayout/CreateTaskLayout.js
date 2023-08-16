@@ -47,11 +47,7 @@ function CreateTaskLayout() {
           assignedTo,
           status,
           priority,
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
+        })
       );
 
       setClientMsg(response?.data?.clientMsg);
@@ -76,7 +72,9 @@ function CreateTaskLayout() {
 
   return (
     <div className="w-full h-full overflow-y-auto overflow-x-hide flex flex-col justify-start items-center">
-      <h1 className="text-3xl text-custom-blue text-bold">Create a new task</h1>
+      <h1 className="text-3xl text-custom-blue text-semibold">
+        Create a new task
+      </h1>
       <div className="w-1/2">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-y-4 py-2">
@@ -147,7 +145,7 @@ function CreateTaskLayout() {
                 </select>
               </div>
             </div>
-            <div className="w-full py-2 flex flex-row justify-between items-center flex-nowrap">
+            <div className="w-full py-2 falex flex-row justify-between items-center flex-nowrap">
               <div>
                 <h2 className="pl-2 text-lg hover:cursor-pointer">
                   Assigned to?
@@ -209,7 +207,7 @@ function CreateTaskLayout() {
               </p>
             )}
             <div className="w-full text-center">
-              <button className="py-2 px-4 rounded-xl bg-custom-blue text-black text-lg font-bold">
+              <button className="py-3 px-5 rounded-xl bg-custom-blue text-custom-black text-xl font-bold">
                 Create task
               </button>
             </div>

@@ -51,7 +51,7 @@ const SearchSelector = ({
             key={obj?._id}
             className={`p-2 hover:bg-sky-600 hover:text-white
               ${
-                obj?.name?.toLowerCase() === selected?.toLocaleLowerCase() &&
+                obj?.name?.toLowerCase() === selected?.toLowerCase() &&
                 " bg-sky-600 text-white"
               }
               "block"`}

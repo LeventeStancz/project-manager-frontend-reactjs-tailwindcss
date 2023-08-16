@@ -28,11 +28,7 @@ function RemoveMemberFromProject() {
     if (!removeMember && !projectname) return;
     try {
       const response = await axiosPrivate.delete(
-        `/members/remove/${projectname}/${removeMember}`,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
+        `/members/remove/${projectname}/${removeMember}`
       );
 
       setClientMsg(response?.data?.clientMsg);
