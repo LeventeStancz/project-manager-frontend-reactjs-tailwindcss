@@ -54,7 +54,6 @@ function ProjectInfoModal({ show, closeModal }) {
                   <DateBox date={project?.finished} />
                 </>
               )}
-              s
             </div>
           </div>
           <p
