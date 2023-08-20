@@ -71,7 +71,7 @@ function EditProjectLayout() {
 
   return (
     <div className="w-full h-full overflow-y-auto overflow-x-hide flex flex-col justify-start items-center">
-      <h1 className="text-3xl text-custom-yellow-base text-bold">
+      <h1 className="text-3xl text-custom-yellow-base font-semibold">
         Edit project data:
       </h1>
       <div className="w-1/2">

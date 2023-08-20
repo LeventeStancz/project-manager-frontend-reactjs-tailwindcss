@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-function ProjectNavbar({ project }) {
+function ProjectNavbar({ isAdmin, project }) {
   return (
     <div>
       <ul className="flex items-center gap-x-4">
@@ -15,7 +15,7 @@ function ProjectNavbar({ project }) {
                 }
     `}
               >
-                tasks
+                Tasks
               </div>
             );
           }}
@@ -31,7 +31,7 @@ function ProjectNavbar({ project }) {
                 }
     `}
               >
-                create
+                Create
               </div>
             );
           }}
@@ -47,7 +47,7 @@ function ProjectNavbar({ project }) {
                 }
     `}
               >
-                members
+                Members
               </div>
             );
           }}
@@ -63,11 +63,29 @@ function ProjectNavbar({ project }) {
                 }
     `}
               >
-                edit
+                Edit
               </div>
             );
           }}
         </NavLink>
+        {isAdmin && (
+          <NavLink to={`/project/${project?.name}/admin`}>
+            {({ isActive }) => {
+              return (
+                <div
+                  className={`text-2xl p-1 flex justify-center items-center ${
+                    isActive
+                      ? " border-b-2 border-custom-purple"
+                      : " hover:border-b-2 hover:border-custom-purple"
+                  }
+  `}
+                >
+                  Admin
+                </div>
+              );
+            }}
+          </NavLink>
+        )}
       </ul>
     </div>
   );

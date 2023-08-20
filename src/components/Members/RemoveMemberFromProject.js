@@ -77,7 +77,7 @@ function RemoveMemberFromProject() {
         <div>
           <div
             onClick={handleRemoveMember}
-            className="w-fit h-fit py-2 px-4 text-semibold text-custom-red bg-custom-gray-base rounded-xl font-semibold hover:cursor-pointer"
+            className="w-fit h-fit py-2 px-4 font-semibold text-custom-red bg-custom-gray-base rounded-xl font-semibold hover:cursor-pointer"
           >
             Remove
           </div>

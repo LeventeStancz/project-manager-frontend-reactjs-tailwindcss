@@ -72,7 +72,7 @@ function CreateTaskLayout() {
 
   return (
     <div className="w-full h-full overflow-y-auto overflow-x-hide flex flex-col justify-start items-center">
-      <h1 className="text-3xl text-custom-blue text-semibold">
+      <h1 className="text-3xl text-custom-blue font-semibold">
         Create a new task
       </h1>
       <div className="w-1/2">

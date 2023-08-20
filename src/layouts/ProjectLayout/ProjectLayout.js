@@ -57,7 +57,9 @@ function ProjectLayout() {
               popup={"Search task by name or short description."}
             />
           )}
-          {(project?.isOwner || isAdmin) && <ProjectNavbar project={project} />}
+          {(project?.isOwner || isAdmin) && (
+            <ProjectNavbar isAdmin={isAdmin} project={project} />
+          )}
         </div>
       </div>
       <Outlet context={[query, setQuery]} />

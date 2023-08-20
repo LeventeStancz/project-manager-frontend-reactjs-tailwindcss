@@ -77,7 +77,7 @@ function AddMemberToProject() {
         <div>
           <div
             onClick={handleAddMember}
-            className="w-fit h-fit py-2 px-4 text-semibold text-custom-green bg-custom-gray-base rounded-xl font-semibold hover:cursor-pointer"
+            className="w-fit h-fit py-2 px-4 font-semibold text-custom-green bg-custom-gray-base rounded-xl font-semibold hover:cursor-pointer"
           >
             Add
           </div>

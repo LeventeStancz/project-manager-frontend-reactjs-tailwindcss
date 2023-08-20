@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 function RootLayout() {
   return (
-    <main className="h-screen max-h-screen w-full min-w-[1580px] overflow-y-hidden overflow-x-hidden">
+    <main className="h-screen max-h-screen w-full min-w-[1550px] overflow-y-hidden overflow-x-hidden">
       <Outlet />
     </main>
   );

@@ -18,6 +18,9 @@ import TaskLayout from "./layouts/ProjectLayout/TaskLayout/TaskLayout";
 import CreateTaskLayout from "./layouts/ProjectLayout/CreateTaskLayout";
 import ProjectMembersLayout from "./layouts/ProjectLayout/ProjectMembersLayout";
 import EditProjectLayout from "./layouts/ProjectLayout/EditProjectLayout";
+//manage
+import ManageLayout from "./layouts/Manage/ManageLayout";
+import ManageProjectsLayout from "./layouts/Manage/ManageProjectsLayout";
 
 function App() {
   return (
@@ -47,6 +50,9 @@ function App() {
                   path=":projectname/edit"
                   element={<EditProjectLayout />}
                 />
+              </Route>
+              <Route path="/manage" element={<ManageLayout />}>
+                <Route path="projects" element={<ManageProjectsLayout />} />
               </Route>
             </Route>
           </Route>

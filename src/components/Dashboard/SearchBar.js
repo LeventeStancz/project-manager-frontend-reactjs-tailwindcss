@@ -1,10 +1,18 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-function Searchbar({ query, setQuery, fit = false, placeholder, popup }) {
+function Searchbar({
+  query,
+  setQuery,
+  fit = false,
+  width,
+  placeholder,
+  popup,
+}) {
   return (
     <div
       className={
-        (fit ? "w-fit " : "w-full ") + " min-w-[320px] h-fit flex flex-col"
+        (fit ? "w-fit " : width ? `w-${width} ` : "w-full ") +
+        " min-w-[320px] h-fit flex flex-col"
       }
     >
       <div className="relative group w-full h-12 bg-custom-gray-base text-custom-gray-bright rounded-2xl px-3 flex flex-nowrap items-center">
