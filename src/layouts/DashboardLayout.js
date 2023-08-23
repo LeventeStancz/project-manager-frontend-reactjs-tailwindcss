@@ -14,7 +14,7 @@ function DashboardLayout() {
   const [searching, setSearching] = useState(false);
   const [query, setQuery] = useState("");
   const [filters, setFiltes] = useState({
-    onlyActive: false,
+    onlyActive: true,
     onlyOwned: false,
   });
   const [projects, setProjects] = useState([]);
