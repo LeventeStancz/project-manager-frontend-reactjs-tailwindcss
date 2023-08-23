@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 
 import Skeleton from "react-loading-skeleton";
 
-import useAxiosGetFetch from "../../hooks/useAxiosGetFetch";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAxiosGetFetch from "../../../hooks/useAxiosGetFetch";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 function CreateTaskLayout() {
   const axiosPrivate = useAxiosPrivate();

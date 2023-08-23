@@ -1,5 +1,5 @@
-import AddMemberToProject from "../../components/Members/AddMemberToProject";
-import RemoveMemberFromProject from "../../components/Members/RemoveMemberFromProject";
+import AddMemberToProject from "../../../components/Members/AddMemberToProject";
+import RemoveMemberFromProject from "../../../components/Members/RemoveMemberFromProject";
 
 function ProjectMembersLayout() {
   return (

@@ -15,12 +15,13 @@ import DashboardLayout from "./layouts/DashboardLayout";
 ///project related
 import ProjectLayout from "./layouts/ProjectLayout/ProjectLayout";
 import TaskLayout from "./layouts/ProjectLayout/TaskLayout/TaskLayout";
-import CreateTaskLayout from "./layouts/ProjectLayout/CreateTaskLayout";
-import ProjectMembersLayout from "./layouts/ProjectLayout/ProjectMembersLayout";
-import EditProjectLayout from "./layouts/ProjectLayout/EditProjectLayout";
+import CreateTaskLayout from "./layouts/ProjectLayout/ProjectSettings/CreateTaskLayout";
+import ProjectMembersLayout from "./layouts/ProjectLayout/ProjectSettings/ProjectMembersLayout";
+import EditProjectLayout from "./layouts/ProjectLayout/ProjectSettings/EditProjectLayout";
 //manage
 import ManageLayout from "./layouts/Manage/ManageLayout";
 import ManageProjectsLayout from "./layouts/Manage/ManageProjectsLayout";
+import ProjectAdminSettingsLayout from "./layouts/ProjectLayout/ProjectSettings/ProjectAdminSettingsLayout";
 
 function App() {
   return (
@@ -49,6 +50,10 @@ function App() {
                 <Route
                   path=":projectname/edit"
                   element={<EditProjectLayout />}
+                />
+                <Route
+                  path=":projectname/admin"
+                  element={<ProjectAdminSettingsLayout />}
                 />
               </Route>
               <Route path="/manage" element={<ManageLayout />}>
