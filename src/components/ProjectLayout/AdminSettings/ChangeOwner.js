@@ -37,6 +37,7 @@ function ChangeOwner() {
     data: ownerData,
     loading: ownerLoading,
     fetchError: ownerFetchError,
+    setRefetch: ownerSetRefetch,
   } = useAxiosGetFetch(`/projects/owner/${projectname}`);
 
   useEffect(() => {
@@ -74,6 +75,8 @@ function ChangeOwner() {
         setClientMsg(error.response.data.clientMsg);
         console.log(error.response.data.error);
       }
+    } finally {
+      ownerSetRefetch((prev) => !prev);
     }
   };
 

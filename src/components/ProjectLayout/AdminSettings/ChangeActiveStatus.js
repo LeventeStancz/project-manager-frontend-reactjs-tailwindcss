@@ -1,10 +1,66 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
+import Skeleton from "react-loading-skeleton";
+
+import useAxiosGetFetch from "../../../hooks/useAxiosGetFetch";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
-function ChangeActiveStatus({ projectData = {} }) {
+function ChangeActiveStatus() {
+  const { projectname } = useParams();
   const axiosPrivate = useAxiosPrivate();
-  const [activeStatus, setActiveStatus] = useState(projectData.isActive);
+  const [activeStatus, setActiveStatus] = useState();
+  const [newStatus, setNewStatus] = useState();
   const [clientMsg, setClientMsg] = useState("");
+
+  const { data, loading, fetchError, setRefetch } = useAxiosGetFetch(
+    `/projects/isActive/${projectname}`
+  );
+
+  useEffect(() => {
+    if (!fetchError && data != null) {
+      setActiveStatus(data.isActive);
+      setNewStatus(!data.isActive);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setClientMsg("");
+    }, 5000); //5sec
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [clientMsg]);
+
+  const handleClick = async () => {
+    if (
+      typeof newStatus === "undefined" ||
+      typeof activeStatus === "undefined" ||
+      newStatus === activeStatus
+    )
+      return;
+
+    try {
+      const response = await axiosPrivate.put(
+        `/projects/update/isActive/${projectname}`,
+        JSON.stringify({
+          newStatus,
+        })
+      );
+
+      setClientMsg(response?.data?.clientMsg);
+    } catch (error) {
+      if (!error.response?.data?.clientMsg || !error.response?.data?.error) {
+        setClientMsg("Server offline. Try again later.");
+      } else {
+        setClientMsg(error.response.data.clientMsg);
+        console.log(error.response.data.error);
+      }
+    } finally {
+      setRefetch((prev) => !prev);
+    }
+  };
 
   return (
     <div className="w-1/2">
@@ -14,29 +70,33 @@ function ChangeActiveStatus({ projectData = {} }) {
             <label htmlFor="name" className="text-xl font-semibold">
               Current:
             </label>
-            <h2 className="text-xl">{activeStatus ? "Active" : "Inactive"}</h2>
+            <h2
+              className={`text-xl font-bold underline ${
+                activeStatus ? "text-custom-green" : "text-custom-red"
+              }`}
+            >
+              {activeStatus ? "Active" : "Inactive"}
+            </h2>
           </div>
-          <input
-            type="text"
-            id="name"
-            autoComplete="off"
-            onChange={(e) => setActiveStatus(e.target.value)}
-            value={activeStatus}
-            maxLength="32"
-            required
-            className="w-full h-fit text-center py-2 bg-zinc-800 rounded-lg focus:ring-0 focus:border-custom-purple"
-          />
+        </div>
+        <div className="w-full text-center">
+          <button
+            onClick={handleClick}
+            className="py-2 px-4 rounded-xl bg-custom-gray-base text-custom-yellow-base text-lg font-semibold"
+          >
+            Update projects status to:
+            {
+              <p className="underline font-bold">
+                {newStatus ? "Active" : "Inactive"}
+              </p>
+            }
+          </button>
         </div>
         {clientMsg && (
           <p className="w-full text-center py-4 text-xl font-semibold text-custom-green">
             {clientMsg}
           </p>
         )}
-        <div className="w-full text-center">
-          <button className="py-2 px-4 rounded-xl bg-custom-gray-base text-custom-yellow-base text-lg font-semibold">
-            Update projects active status
-          </button>
-        </div>
       </div>
     </div>
   );
