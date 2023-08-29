@@ -36,7 +36,7 @@ function MainLayout() {
             href="/invites"
             icon={<BellIcon className="w-7 h-7" />}
             text={"Invites"}
-  />*/}
+         />*/}
           <SidebarItem
             href="/profile"
             icon={<UserIcon className="w-7 h-7" />}
@@ -51,16 +51,6 @@ function MainLayout() {
               />
             </DropDown>
           )}
-          {/*<div className="w-full overflow-y-scroll">
-            <div className="w-full flex flex-col space-y-20">
-              <p>Favorite item</p>
-              <p>Favorite item</p>
-              <p>Favorite item</p>
-              <p>Favorite item</p>
-              <p>Favorite item</p>
-              <p>Favorite item</p>
-            </div>
-          </div>*/}
         </Sidebar>
       </SidebarProvider>
       <Outlet />

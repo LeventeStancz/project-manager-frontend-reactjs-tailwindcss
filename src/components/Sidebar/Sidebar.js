@@ -9,6 +9,8 @@ import {
   ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 
+import HorizontalLine from "../Special/HorizontalLine";
+
 import useLogout from "../../hooks/useLogout";
 import useSidebar from "../../hooks/useSidebar";
 
@@ -19,7 +21,7 @@ export default function Sidebar({ children }) {
   const { expanded, setExpanded } = useSidebar();
   const logout = useLogout();
 
-  const { data, loading, fetchError, setRefetch } = useAxiosGetFetch(`/users`);
+  const { data, loading, fetchError } = useAxiosGetFetch(`/users`);
 
   useEffect(() => {
     if (!fetchError && data != null) {
@@ -28,7 +30,7 @@ export default function Sidebar({ children }) {
   }, [data]);
 
   return (
-    <aside className="h-full">
+    <aside className="h-full max-h-screen">
       <nav className="h-full flex flex-col bg-custom-black border-r border-custom-gray-dark">
         <div className="p-4 flex flex-row justify-between items-center">
           <h1
@@ -40,17 +42,17 @@ export default function Sidebar({ children }) {
           </h1>
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className={`relative group p-1.5 ${
+            className={`p-1.5 ${
               !expanded && "mr-1"
-            } rounded-lg ring-2 ring-slate-700 hover:ring-slate-400`}
+            } relative group rounded-lg ring-2 ring-slate-700 hover:ring-slate-400`}
           >
             <div
               className={`
-          absolute left-10 rounded-md px-2 py-1 ml-6
-          bg-slate-600 text-slate-300 text-sm
-          invisible opacity-20 -translate-x-3 transition-all duration-300
-          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
-      `}
+            absolute left-full rounded-md px-2 py-1 ml-7
+           bg-slate-600 text-slate-300 text-sm
+            invisible opacity-20 -translate-x-3 transition-all duration-300
+            group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
+            `}
             >
               {expanded ? "Close" : "Open"}
             </div>
@@ -62,48 +64,74 @@ export default function Sidebar({ children }) {
           </button>
         </div>
 
-        <div className="h-full max-h-full overflow-y-hidden overflow-x-hidden flex flex-col justify-between">
-          <div className="overflow-y-hidden overflow-x-hidden px-3 flex flex-col gap-y-2">
-            {children}
+        <div className="px-3 flex flex-col gap-y-2">{children}</div>
+        <div className="flex-1"></div>
+        {/*<div
+          className={`${
+            expanded ? "w-full" : "w-0"
+          } transition-all duration-300 pt-4 h-full max-h-full overflow-y-hidden overflow-x-hidden flex flex-col`}
+        >
+          <HorizontalLine />
+          <p className="pl-4 pt-4 pb-2 text-lg font-semibold text-custom-purple truncate">
+            Favorites
+          </p>
+          <div className="py-1 flex-1 overflow-y-scroll">
+            <div className="px-8 flex flex-col gap-y-3">
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+              <p className="truncate">Favorite</p>
+            </div>
           </div>
-          <div className="border-t border-custom-gray-light flex justify-center items-center p-3">
-            <div className="relative group">
-              {!expanded && (
-                <div
-                  className={`
+        </div>*/}
+        <div className="border-t border-custom-gray-light flex justify-center items-center p-3">
+          <div className="relative group">
+            {!expanded && (
+              <div
+                className={`
           absolute left-10 rounded-md px-2 py-1 ml-6
           bg-slate-600 text-slate-300 text-sm
           invisible opacity-20 -translate-x-3 transition-all duration-300
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
       `}
-                >
-                  Logout
-                </div>
-              )}
-              <ArrowRightOnRectangleIcon
-                onClick={logout}
-                className="w-8 h-8 text-slate-400 hover:cursor-pointer"
-              />
-            </div>
-
-            <div
-              className={`
+              >
+                Logout
+              </div>
+            )}
+            <ArrowRightOnRectangleIcon
+              onClick={logout}
+              className="w-8 h-8 text-slate-400 hover:cursor-pointer"
+            />
+          </div>
+          <div
+            className={`
               flex items-center
               overflow-hidden transition-all duration-300 ${
                 expanded ? "w-44 ml-3" : "w-0"
               }
           `}
-            >
-              <div className="leading-4 truncate text-custom-gray-bright">
-                <NavLink to="/profile">
-                  <h4 className="font-semibold truncate text-white hover:underline hover:cursor-pointer">
-                    {loading ? <Skeleton width={100} /> : user?.username}
-                  </h4>
-                </NavLink>
-                <span className="text-xs">
-                  {loading ? <Skeleton width={140} /> : user?.email}
-                </span>
-              </div>
+          >
+            <div className="leading-4 truncate text-custom-gray-bright">
+              <NavLink to="/profile">
+                <h4 className="font-semibold truncate text-white hover:underline hover:cursor-pointer">
+                  {loading ? <Skeleton width={100} /> : user?.username}
+                </h4>
+              </NavLink>
+              <span className="text-xs">
+                {loading ? <Skeleton width={140} /> : user?.email}
+              </span>
             </div>
           </div>
         </div>

@@ -27,7 +27,7 @@ function DropDown({ children }) {
         }}
         className="relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors group duration-300 hover:bg-slate-600"
       >
-        <Cog6ToothIcon className="w-7 h-7" />
+        <Cog6ToothIcon className="w-8 h-8" />
         <span
           className={`
           overflow-hidden transition-all duration-300 ${
@@ -40,7 +40,7 @@ function DropDown({ children }) {
         <ArrowDownCircleIcon
           className={
             (opened && "rotate-180 ") +
-            "transition-all duration-300 w-7 h-7 " +
+            "transition-all duration-300 w-8 h-8 " +
             (!expanded && "hidden")
           }
         />
