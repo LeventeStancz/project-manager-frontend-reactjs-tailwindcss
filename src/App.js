@@ -12,6 +12,7 @@ import Login from "./pages/register-login/Login";
 import RootLayout from "./layouts/RootLayout";
 import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
+import ProfileLayout from "./layouts/ProfileLayout";
 ///project related
 import ProjectLayout from "./layouts/ProjectLayout/ProjectLayout";
 import TaskLayout from "./layouts/ProjectLayout/TaskLayout/TaskLayout";
@@ -37,6 +38,7 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route element={<MainLayout />}>
               <Route index path="/" element={<DashboardLayout />} />
+              <Route path="/profile" element={<ProfileLayout />} />
               <Route path="/project" element={<ProjectLayout />}>
                 <Route path=":projectname/tasks" element={<TaskLayout />} />
                 <Route

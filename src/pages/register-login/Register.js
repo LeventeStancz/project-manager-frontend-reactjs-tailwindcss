@@ -96,6 +96,8 @@ function Register() {
       }
     }
   };
+
+  
   return (
     <main className="w-full h-screen flex flex-col justify-start items-center mt-10">
       <section className="w-1/4 h-fit p-4 rounded-xl bg-zinc-800">
