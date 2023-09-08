@@ -18,7 +18,7 @@ function ProjectLayout() {
   const [project, setProject] = useState({});
   const [query, setQuery] = useState("");
 
-  const { data, loading, fetchError, setRefetch } = useAxiosGetFetch(
+  const { data, loading, fetchError, setRefetch, status } = useAxiosGetFetch(
     `/projects/${typeof projectname === "undefined" ? "recent" : projectname}`
   );
 
@@ -27,6 +27,12 @@ function ProjectLayout() {
       setProject(data.project);
       if (typeof projectname === "undefined") {
         navigate(`/project/${data.projectName}/tasks`, { replace: true });
+      }
+    } else {
+      if (status === 401) {
+        navigate(`/unauthorized`, { replace: true });
+      } else if (status === 404) {
+        navigate(`/missing`, { replace: true });
       }
     }
   }, [data]);

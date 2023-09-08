@@ -7,6 +7,7 @@ function useAxiosGetFetch(url) {
   const [refetch, setRefetch] = useState(false);
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(null);
+  const [status, setStatus] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -24,6 +25,7 @@ function useAxiosGetFetch(url) {
         }
       } catch (error) {
         if (isMounted) {
+          setStatus(error.response.status);
           if (
             !error.response?.data?.clientMsg ||
             !error.response?.data?.error
@@ -50,7 +52,7 @@ function useAxiosGetFetch(url) {
     return cleanUp;
   }, [url, refetch]);
 
-  return { data, loading, fetchError, setRefetch };
+  return { data, loading, fetchError, setRefetch, status };
 }
 
 export default useAxiosGetFetch;
