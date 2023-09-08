@@ -154,7 +154,7 @@ export function SidebarItem({
         return (
           <div
             className={`
-        relative flex items-center py-2 px-3 my-1
+        relative flex items-center py-2 px-3.5 my-1
         font-medium rounded-md cursor-pointer
         transition-colors group duration-300
         ${isActive ? " bg-slate-800" : " hover:bg-slate-600"}
