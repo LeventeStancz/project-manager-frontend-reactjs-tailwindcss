@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://project-manager-api-xo8j.onrender.com:5000/api";
+const BASE_URL = "https://project-manager-api-xo8j.onrender.com/api";
 
 export default axios.create({
   baseURL: BASE_URL,
