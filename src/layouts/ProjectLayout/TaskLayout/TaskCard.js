@@ -51,11 +51,9 @@ const TaskCard = ({ task, index }) => {
           );
         }}
       </Draggable>
-      <TaskModal
-        show={taskModal}
-        closeModal={() => setTaskModal(false)}
-        task={task}
-      />
+      {taskModal && (
+        <TaskModal closeModal={() => setTaskModal(false)} task={task} />
+      )}
     </div>
   );
 };
